@@ -2,9 +2,9 @@ namespace food_book;
 
 public class User
 {
-    private int id {get; set;}
+    internal int id {get; set;}
 
-    private DateTime createdAcc { get; set; }
+    internal DateTime createdAcc { get; set; }
 
     public string name  { get; set; }
 

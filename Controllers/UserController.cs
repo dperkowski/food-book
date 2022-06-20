@@ -16,12 +16,9 @@ public class UserController : ControllerBase
         _logger = logger;
     }
 
-    private byte[] salt = new byte[128 / 8];
-
-    using (var rngCsp = new RNGCryptoServiceProvider())
-             {
-                  rngCsp.GetNonZeroBytes(salt);
-             }
+    byte[] salt = new byte[128 / 8];
+    private static readonly RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider();
+    
 
     [HttpGet]
     public IEnumerable<User> Get()
@@ -32,12 +29,12 @@ public class UserController : ControllerBase
             createdAcc = DateTime.Now.AddDays(index),
             name = "Testowy",
             mail = "test@test.pl",
-            hashPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            hashPass = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                                       password: "zaq1@WSX",
                                       salt: salt,
                                       prf: KeyDerivationPrf.HMACSHA256,
                                       iterationCount: 100000,
-                                      numBytesRequested: 256 / 8));
+                                      numBytesRequested: 256 / 8))
         })
         .ToArray();
     }
