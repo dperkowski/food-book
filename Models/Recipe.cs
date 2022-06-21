@@ -9,6 +9,8 @@ public class Recipe
     public int hardLevel { get; set; }
 
     public int time { get; set; }
+    
+    public string image { get; set; }
 }
 
 public class UserRecipe : Recipe
