@@ -11,7 +11,7 @@ const CookingBook = () => {
 
   const { data, error, isLoading } = useGetUserQuery(1);
 
-  console.log(data);
+  // console.log(data);
 
   const [userList, setUserList] = useState([
     {
@@ -80,6 +80,14 @@ const CookingBook = () => {
       </button>
     </form>
   );
+
+  async function populateWeatherData() {
+    const response = await fetch("api/recipe");
+    console.log(response);
+    const data = await response;
+    console.log(data);
+  }
+  populateWeatherData();
 
   return (
     <div>
