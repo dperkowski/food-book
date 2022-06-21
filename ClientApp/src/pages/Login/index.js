@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useGetUserQuery } from "../../redux/api";
+import { useGetUserQuery, useGetRecipeQuery } from "../../redux/api";
 
 const CookingBook = () => {
   const defaultDataStructure = {
@@ -9,9 +9,10 @@ const CookingBook = () => {
     password: "",
   };
 
-  const { data, error, isLoading } = useGetUserQuery(1);
+  // const { data, error, isLoading } = useGetUserQuery();
+  const { data, error, isLoading } = useGetRecipeQuery();
 
-  // console.log(data);
+  console.log(data);
 
   const [userList, setUserList] = useState([
     {
@@ -80,14 +81,6 @@ const CookingBook = () => {
       </button>
     </form>
   );
-
-  async function populateWeatherData() {
-    const response = await fetch("api/recipe");
-    console.log(response);
-    const data = await response;
-    console.log(data);
-  }
-  populateWeatherData();
 
   return (
     <div>

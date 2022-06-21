@@ -3,13 +3,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.jikan.moe/v4",
+    baseUrl: "api/",
   }),
   endpoints: (builder) => ({
     GetUser: builder.query({
-      query: (id) => `anime/${id}`,
+      query: () => `user`,
+    }),
+    GetRecipe: builder.query({
+      query: () => `recipe`,
     }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useGetRecipeQuery } = userApi;
