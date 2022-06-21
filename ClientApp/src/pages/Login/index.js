@@ -2,28 +2,31 @@ import React, { useEffect, useState } from "react";
 
 const CookingBook = () => {
   const defaultDataStructure = {
-    id: 0,
-    title: "",
-    description: "",
-    isFav: false,
-    isVisible: true,
+    id: null,
+    email: "",
+    password: "",
   };
 
   const [userList, setUserList] = useState([
     {
       id: 0,
-      email: "test@test.pl",
-      password: "",
+      email: "@",
+      password: "123",
+    },
+    {
+      id: 1,
+      email: "@1",
+      password: "123",
     },
   ]);
-  const [loggedUser, setLoggedUser] = useState();
-  const [loginValue, setLoginValue] = useState({});
+
+  const [loginValue, setLoginValue] = useState({ ...defaultDataStructure });
+  const [loggedUser, setLoggedUser] = useState({ ...defaultDataStructure });
 
   const handleLoginInputChange = (e, type) => {
     const newLoginValue = { ...loginValue };
     if (type === "email") {
       newLoginValue.email = e.target.value;
-      setLoginValue(newLoginValue);
     } else if (type === "password") {
       newLoginValue.password = e.target.value;
     }
@@ -32,12 +35,20 @@ const CookingBook = () => {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    userList.map((user) => {
+      if (
+        user.email === loginValue.email &&
+        user.password === loginValue.password
+      ) {
+        setLoggedUser(user);
+      }
+    });
   };
 
   const loginForm = (
     <form onSubmit={handleLoginSubmit}>
       <div className="form-group">
-        <label>Title</label>
+        <label>Login</label>
         <input
           type="text"
           className="form-control"
@@ -48,7 +59,7 @@ const CookingBook = () => {
         ></input>
       </div>
       <div className="form-group">
-        <label>Description</label>
+        <label>Password</label>
         <input
           type="password"
           className="form-control"
@@ -67,6 +78,9 @@ const CookingBook = () => {
   return (
     <div>
       <h1>Login</h1>
+      <h2>User: {loggedUser.email}</h2>
+      <h2>Password: {loggedUser.password}</h2>
+      <h2>Id: {loggedUser.id}</h2>
       {loginForm}
     </div>
   );

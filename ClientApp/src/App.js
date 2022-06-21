@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
@@ -7,20 +7,22 @@ import { Counter } from "./components/Counter";
 import CookingBook from "./pages/CookingBook";
 import Login from "./pages/Login";
 
+import axios from "axios";
+
 import "./custom.css";
 
-export default class App extends Component {
-  static displayName = App.name;
+const App = () => {
+  const displayName = App.name;
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path="/" component={Home} />
-        <Route path="/counter" component={Counter} />
-        <Route path="/fetch-data" component={FetchData} />
-        <Route path="/cooking-book" component={CookingBook} />
-        <Route path="/login" component={Login} />
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout>
+      <Route exact path="/" component={Home} />
+      <Route path="/counter" component={Counter} />
+      <Route path="/fetch-data" component={FetchData} />
+      <Route path="/cooking-book" component={CookingBook} />
+      <Route path="/login" component={Login} />
+    </Layout>
+  );
+};
+
+export default App;
