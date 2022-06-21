@@ -7,8 +7,6 @@ import { Counter } from "./components/Counter";
 import CookingBook from "./pages/CookingBook";
 import Login from "./pages/Login";
 
-import axios from "axios";
-
 import "./custom.css";
 
 const App = () => {
