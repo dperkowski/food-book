@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace food_book.Controllers;
 
@@ -13,7 +14,7 @@ public class RecipeController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet(Name = "test"), Authorize]
     public IEnumerable<Recipe> Get()
     {
         var tempCat = new List<int>();
