@@ -54,8 +54,8 @@ const CookingBook = () => {
 
   const loginForm = (
     <form onSubmit={handleLoginSubmit}>
-      <div className="form-group">
-        <label>Login</label>
+      <div className="input-group mb-3">
+        <span class="input-group-text">Email</span>
         <input
           type="text"
           className="form-control"
@@ -65,8 +65,9 @@ const CookingBook = () => {
           onChange={(e) => handleLoginInputChange(e, "email")}
         ></input>
       </div>
-      <div className="form-group">
-        <label>Password</label>
+
+      <div className="input-group">
+        <span class="input-group-text">Password</span>
         <input
           type="password"
           className="form-control"
@@ -75,20 +76,28 @@ const CookingBook = () => {
           value={loginValue.password}
           onChange={(e) => handleLoginInputChange(e, "password")}
         ></input>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
       </div>
-      <button type="submit" className="btn btn-primary">
-        Login
-      </button>
     </form>
   );
 
   return (
-    <div>
-      <h1>Login</h1>
-      <h2>User: {loggedUser.email}</h2>
-      <h2>Password: {loggedUser.password}</h2>
-      <h2>Id: {loggedUser.id}</h2>
-      {loginForm}
+    <div className="container mt-auto">
+      <div className="row">
+        <h1 className="display-1 mb-4 text-center">Login</h1>
+      </div>
+
+      <div className="row">
+        <div className="col-md-6 offset-md-3">{loginForm}</div>
+      </div>
+
+      <div className="row">
+        <p>User: {loggedUser.email}</p>
+        <p>Password: {loggedUser.password}</p>
+        <p>Id: {loggedUser.id}</p>
+      </div>
     </div>
   );
 };

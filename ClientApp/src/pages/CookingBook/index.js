@@ -157,75 +157,81 @@ const CookingBook = () => {
 
   const searchBar = (
     <form onSubmit={handleSearchSubmit}>
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Search"
-        onChange={handleSearch}
-        value={searchValue}
-      />
-      <button type="submit" className="btn btn-primary">
-        Search
-      </button>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search"
+          onChange={handleSearch}
+          value={searchValue}
+          aria-label="Search"
+        ></input>
+        <button class="btn btn-outline-primary" type="button">
+          Search
+        </button>
+      </div>
     </form>
   );
 
   const editForm = (recipe) => (
-    <div key={recipe.id} className="recipes__item">
+    <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
       <form onSubmit={(e) => editRecipe(e, recipe.id)}>
-        <div className="form-group">
-          <label>Title</label>
+        <div className="input-group mb-3">
+          <span class="input-group-text">title</span>
           <input
             type="text"
             className="form-control"
-            aria-describedby="recipeTitle"
+            aria-describedby="Title"
             placeholder="Enter title"
             value={recipeValue.title}
             onChange={(e) => handleEditorInputChange(e, "title")}
           ></input>
         </div>
-        <div className="form-group">
-          <label>Description</label>
-          <input
+
+        <div className="input-group">
+          <span class="input-group-text">Description</span>
+          <textarea
             type="text"
             className="form-control"
-            aria-describedby="recipeTitle"
+            aria-describedby="Description"
             placeholder="Enter title"
             value={recipeValue.description}
             onChange={(e) => handleEditorInputChange(e, "description")}
-          ></input>
+          ></textarea>
+          <button type="submit" className="btn btn-primary">
+            Done
+          </button>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Edit
-        </button>
       </form>
     </div>
   );
 
   const singleRecipe = (recipe) =>
     recipe.isVisible ? (
-      <div key={recipe.id} className="recipes__item">
-        <h2 className="recipes__title">{recipe.title}</h2>
-        <p>Favorite? - {recipe.isFav ? "Yes" : "No"}</p>
-        <p className="recipes__description">{recipe.description}</p>
-        <button
-          className="btn btn-primary"
-          onClick={() => deleteRecipe(recipe.id)}
-        >
-          Delete
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => setFavRecipe(recipe.id)}
-        >
-          Favorite
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => enableEditRecipe(recipe.id)}
-        >
-          Edit
-        </button>
+      <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
+        <h2>{recipe.title}</h2>
+        <p>{recipe.description}</p>
+
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            className={recipe.isFav ? "btn btn-success" : "btn btn-primary"}
+            onClick={() => setFavRecipe(recipe.id)}
+          >
+            Favorite
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => enableEditRecipe(recipe.id)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteRecipe(recipe.id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     ) : null;
 
@@ -237,8 +243,8 @@ const CookingBook = () => {
 
   const addRecipeForm = (
     <form onSubmit={addRecipe}>
-      <div className="form-group">
-        <label>Title</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Title</span>
         <input
           type="text"
           className="form-control"
@@ -248,29 +254,43 @@ const CookingBook = () => {
           onChange={(e) => handleAddRecipeInputChange(e, "title")}
         ></input>
       </div>
-      <div className="form-group">
-        <label>Description</label>
-        <input
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Description</span>
+        <textarea
           type="text"
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Enter title"
           value={newRecipe.description}
           onChange={(e) => handleAddRecipeInputChange(e, "description")}
-        ></input>
+        ></textarea>
+        <button class="btn btn-primary" type="submit">
+          Add
+        </button>
       </div>
-      <button type="submit" className="btn btn-primary">
-        Add
-      </button>
     </form>
   );
 
   return (
-    <div>
-      <h1>Coking book</h1>
-      {searchBar}
-      <ul className="recipes">{recipeListMap}</ul>
-      {addRecipeForm}
+    <div className="container mb-4">
+      <div className="row">
+        <div className="col-md-12">
+          <h1 className="display-1 mb-4 text-center">Coking book</h1>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">{searchBar}</div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">{recipeListMap}</div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">{addRecipeForm}</div>
+      </div>
     </div>
   );
 };
