@@ -21,7 +21,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register(UserDto request)
+    public async Task<ActionResult<User>> Register(UserRegisterDto request)
     {
         CreatePassHash(request.pass, out byte[] passHash, out byte[] passSalt);
         
@@ -38,7 +38,7 @@ public class UserController : ControllerBase
     
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserDto request)
+    public async Task<ActionResult<string>> Login(UserLoginDto request)
     {
         if (user.mail != request.mail || !VerifyPassHash(request.pass, user.passHash, user.passSalt))
         {
