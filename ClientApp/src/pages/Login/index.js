@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 
+import { useGetUserQuery } from "../../redux/api";
+
 const CookingBook = () => {
   const defaultDataStructure = {
     id: null,
     email: "",
     password: "",
   };
+
+  const { data, error, isLoading } = useGetUserQuery(1);
+
+  console.log(data);
 
   const [userList, setUserList] = useState([
     {
