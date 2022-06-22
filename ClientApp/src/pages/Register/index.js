@@ -17,14 +17,18 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) toast.error(message);
-    if (isSuccess || user) navigate("/");
+    if (isSuccess || user) {
+      toast("Logged in");
+      navigate("/");
+    }
     dispatch(reset);
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    password2: "",
+    name: "",
+    mail: "",
+    pass: "",
+    pass2: "",
   });
 
   const handleLoginInputChange = (e, type) => {
@@ -32,13 +36,13 @@ const Register = () => {
 
     switch (type) {
       case "email":
-        newRegisterValue.email = e.target.value;
+        newRegisterValue.mail = e.target.value;
         break;
       case "password":
-        newRegisterValue.password = e.target.value;
+        newRegisterValue.pass = e.target.value;
         break;
       case "password2":
-        newRegisterValue.password2 = e.target.value;
+        newRegisterValue.pass2 = e.target.value;
         break;
       default:
         break;
@@ -49,16 +53,16 @@ const Register = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    const { email, password, password2 } = formData;
+    const { name, mail, pass, pass2 } = formData;
 
-    if (password !== password2) {
+    if (pass !== pass2) {
       toast.error("Passwords do not mach");
     } else {
       const userData = {
-        email,
-        password,
+        name,
+        mail,
+        pass,
       };
-      console.log(userData);
       dispatch(register(userData));
     }
   };
@@ -72,7 +76,7 @@ const Register = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Email"
-          value={formData.email}
+          value={formData.mail}
           onChange={(e) => handleLoginInputChange(e, "email")}
         ></input>
       </div>
@@ -84,7 +88,7 @@ const Register = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Password"
-          value={formData.password}
+          value={formData.pass}
           onChange={(e) => handleLoginInputChange(e, "password")}
         ></input>
       </div>
@@ -96,7 +100,7 @@ const Register = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Repeat password"
-          value={formData.password2}
+          value={formData.pass2}
           onChange={(e) => handleLoginInputChange(e, "password2")}
         ></input>
         <button type="submit" className="btn btn-primary">

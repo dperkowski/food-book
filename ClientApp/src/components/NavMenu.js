@@ -8,10 +8,23 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavMenu.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
+
 const NavMenu = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
+
   const displayName = NavMenu.name;
   const [collapsed, setCollapsed] = useState(true);
 
@@ -48,9 +61,17 @@ const NavMenu = () => {
               {menuItem("/counter", "Counter")}
               {menuItem("/fetch-data", "Fetch data")}
               {menuItem("/cooking-book", "Cooking Book")}
-              {menuItem("/login", "Login")}
-              {menuItem("/register", "Register")}
               {menuItem("/user-profile", "User Profile")}
+              {user ? (
+                <button className="btn btn-primary" onClick={onLogout}>
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <>{menuItem("/register", "Register")}</>
+                  <>{menuItem("/login", "Login")}</>
+                </>
+              )}
             </ul>
           </Collapse>
         </Container>
