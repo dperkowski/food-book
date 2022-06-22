@@ -3,7 +3,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
+using food_book.Data;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace food_book.Controllers;
@@ -13,26 +15,32 @@ namespace food_book.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-    public static User user = new User();
+    private readonly DataContext _context;
 
-    public UserController(IConfiguration configuration)
+    public UserController(IConfiguration configuration, DataContext context)
     {
         _configuration = configuration;
+        _context = context;
     }
 
     [HttpPost("register")]
     public async Task<ActionResult<User>> Register(UserRegisterDto request)
     {
         CreatePassHash(request.pass, out byte[] passHash, out byte[] passSalt);
-        
-        user.id = DateTime.Now.Ticks;
-        user.name = request.name;
-        user.mail = request.mail;
-        user.createdAcc = DateTime.Now;
-        user.passHash = passHash;
-        user.passSalt = passSalt;
+        var user = new User
+        {
+            id = DateTime.Now.Ticks,
+            name = request.name,
+            mail = request.mail,
+            createdAcc = DateTime.Now,
+            passHash = passHash,
+            passSalt = passSalt
+        };
 
-        return Ok(user);
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        
+        return Ok(await _context.Users.ToListAsync());
 
     }
     
@@ -40,7 +48,9 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<string>> Login(UserLoginDto request)
     {
-        if (user.mail != request.mail || !VerifyPassHash(request.pass, user.passHash, user.passSalt))
+        var user = await _context.Users.Where(User => User.mail == request.mail).FirstAsync();
+        
+        if (user == null || !VerifyPassHash(request.pass, user.passHash, user.passSalt))
         {
             return BadRequest("Your mail or password is incorrect");
         }
