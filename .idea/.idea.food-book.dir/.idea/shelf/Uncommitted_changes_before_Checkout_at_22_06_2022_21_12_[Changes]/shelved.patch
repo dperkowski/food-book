@@ -1,0 +1,15 @@
+Index: Data/DataContext.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Security.Cryptography.X509Certificates;\r\nusing Microsoft.EntityFrameworkCore;\r\n\r\nnamespace food_book.Data;\r\n\r\npublic class DataContext : DbContext\r\n{\r\n    public DataContext(DbContextOptions<DataContext> options) : base(options)\r\n    {\r\n        \r\n    }\r\n    \r\n    public DbSet<User> Users { get; set; }\r\n}\r\n
+===================================================================
+diff --git a/Data/DataContext.cs b/Data/DataContext.cs
+--- a/Data/DataContext.cs	
++++ b/Data/DataContext.cs	
+@@ -11,4 +11,6 @@
+     }
+     
+     public DbSet<User> Users { get; set; }
++    
++    public DbSet<Recipe> Recipes { get; set; }
+ }
