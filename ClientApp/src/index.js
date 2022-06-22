@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 
 //redux
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { store } from "./app/store";
 
 const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href");
 const rootElement = document.getElementById("root");

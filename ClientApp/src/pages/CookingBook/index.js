@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+// import { useGetRecipesQuery } from "../../features/Recipes";
+
 const CookingBook = () => {
+  // const { data, error, isLoading } = useGetRecipesQuery();
+
   const defaultDataStructure = {
     id: 0,
     title: "",
@@ -50,6 +54,7 @@ const CookingBook = () => {
   const [newRecipe, setNewRecipe] = useState({
     ...defaultDataStructure,
   });
+  const [showFavorites, setShowFavorites] = useState(false);
 
   //ADD
   const handleAddRecipeInputChange = (e, type) => {
@@ -134,30 +139,54 @@ const CookingBook = () => {
 
   //SEARCH
   const [searchValue, setSearchValue] = useState("");
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
+  const handleSearchClick = (e, type) => {
     const newRecipeList = [...recipeList];
 
-    newRecipeList.map((recipe) => {
-      if (recipe.title.toLowerCase().includes(searchValue.toLowerCase())) {
+    if (type === "search") {
+      e.preventDefault();
+
+      newRecipeList.map((recipe) => {
+        if (recipe.title.toLowerCase().includes(searchValue.toLowerCase())) {
+          recipe.isVisible = true;
+          setRecipeList(newRecipeList);
+        } else {
+          recipe.isVisible = false;
+          setRecipeList(newRecipeList);
+        }
+      });
+    } else if (type === "favorites") {
+      setShowFavorites((prev) => !prev);
+    }
+  };
+
+  useEffect(() => {
+    const newRecipeList = [...recipeList];
+    if (showFavorites) {
+      newRecipeList.map((recipe) => {
+        if (recipe.isFav) {
+          recipe.isVisible = true;
+          setRecipeList(newRecipeList);
+        } else {
+          recipe.isVisible = false;
+          setRecipeList(newRecipeList);
+        }
+      });
+    } else if (!showFavorites) {
+      newRecipeList.map((recipe) => {
         recipe.isVisible = true;
         setRecipeList(newRecipeList);
-      } else {
-        recipe.isVisible = false;
-        setRecipeList(newRecipeList);
-      }
-    });
-
-    // setRecipeList();
-  };
+      });
+    }
+    console.log(showFavorites);
+  }, [showFavorites]);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
 
   const searchBar = (
-    <form onSubmit={handleSearchSubmit}>
-      <div class="input-group mb-3">
+    <form onSubmit={(e) => handleSearchClick(e, "search")}>
+      <div className="input-group mb-3">
         <input
           type="text"
           className="form-control"
@@ -166,7 +195,14 @@ const CookingBook = () => {
           value={searchValue}
           aria-label="Search"
         ></input>
-        <button class="btn btn-outline-primary" type="button">
+        <button
+          className="btn btn-outline-primary"
+          type="button"
+          onClick={(e) => handleSearchClick(e, "favorites")}
+        >
+          Favorites
+        </button>
+        <button className="btn btn-outline-primary" type="button">
           Search
         </button>
       </div>
@@ -177,7 +213,7 @@ const CookingBook = () => {
     <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
       <form onSubmit={(e) => editRecipe(e, recipe.id)}>
         <div className="input-group mb-3">
-          <span class="input-group-text">title</span>
+          <span className="input-group-text">title</span>
           <input
             type="text"
             className="form-control"
@@ -189,7 +225,7 @@ const CookingBook = () => {
         </div>
 
         <div className="input-group">
-          <span class="input-group-text">Description</span>
+          <span className="input-group-text">Description</span>
           <textarea
             type="text"
             className="form-control"
@@ -208,7 +244,10 @@ const CookingBook = () => {
 
   const singleRecipe = (recipe) =>
     recipe.isVisible ? (
-      <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
+      <div
+        key={recipe.id}
+        className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
+      >
         <h2>{recipe.title}</h2>
         <p>{recipe.description}</p>
 
@@ -243,8 +282,8 @@ const CookingBook = () => {
 
   const addRecipeForm = (
     <form onSubmit={addRecipe}>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Title</span>
+      <div className="input-group mb-3">
+        <span className="input-group-text">Title</span>
         <input
           type="text"
           className="form-control"
@@ -255,8 +294,8 @@ const CookingBook = () => {
         ></input>
       </div>
 
-      <div class="input-group mb-3">
-        <span class="input-group-text">Description</span>
+      <div className="input-group mb-3">
+        <span className="input-group-text">Description</span>
         <textarea
           type="text"
           className="form-control"
@@ -265,7 +304,7 @@ const CookingBook = () => {
           value={newRecipe.description}
           onChange={(e) => handleAddRecipeInputChange(e, "description")}
         ></textarea>
-        <button class="btn btn-primary" type="submit">
+        <button className="btn btn-primary" type="submit">
           Add
         </button>
       </div>

@@ -2,15 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import counterReducer from "./counter";
-import { userApi } from "./api";
+import { recipesApi } from "./recipesApi";
 
-export const store = configureStore({
+export const recipesStore = configureStore({
   reducer: {
     counter: counterReducer,
-    [userApi.reducerPath]: userApi.reducer,
+    [recipesApi.reducerPath]: recipesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userApi.middleware),
+    getDefaultMiddleware().concat(recipesApi.middleware),
 });
 
-setupListeners(store.dispatch);
+setupListeners(recipesStore.dispatch);

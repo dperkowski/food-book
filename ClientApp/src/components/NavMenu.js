@@ -49,6 +49,8 @@ const NavMenu = () => {
               {menuItem("/fetch-data", "Fetch data")}
               {menuItem("/cooking-book", "Cooking Book")}
               {menuItem("/login", "Login")}
+              {menuItem("/register", "Register")}
+              {menuItem("/user-profile", "User Profile")}
             </ul>
           </Collapse>
         </Container>

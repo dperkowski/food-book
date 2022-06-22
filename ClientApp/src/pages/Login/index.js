@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import { useGetUserQuery, useGetRecipeQuery } from "../../redux/api";
+// import { useGetUserQuery, useGetRecipeQuery } from "../../redux/api";
 
-const CookingBook = () => {
+const Login = () => {
   const defaultDataStructure = {
     id: null,
     email: "",
     password: "",
+    favRecipes: [],
   };
 
   // const { data, error, isLoading } = useGetUserQuery();
-  const { data, error, isLoading } = useGetRecipeQuery();
-
-  console.log(data);
+  // const { data, error, isLoading } = useGetRecipeQuery();
 
   const [userList, setUserList] = useState([
     {
@@ -85,7 +84,7 @@ const CookingBook = () => {
 
   return (
     <div className="container mt-auto">
-      <div className="row">
+      <div className="row mb-4">
         <h1 className="display-1 mb-4 text-center">Login</h1>
       </div>
 
@@ -102,4 +101,4 @@ const CookingBook = () => {
   );
 };
 
-export default CookingBook;
+export default Login;
