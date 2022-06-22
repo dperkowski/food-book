@@ -1,5 +1,7 @@
 using System.Text;
+using food_book.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString(("DefaultConnection"))));
 builder.Services.AddAuthentication(
     JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

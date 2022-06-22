@@ -1,10 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace food_book;
 
 public class User
 {
-    internal long id {get; set;}
+    [Key]
+    public long id {get; set;}
 
-    internal DateTime createdAcc { get; set; }
+    public DateTime createdAcc { get; set; }
 
     public string name  { get; set; } = string.Empty;
 
