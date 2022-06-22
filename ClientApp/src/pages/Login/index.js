@@ -1,54 +1,55 @@
 import React, { useEffect, useState } from "react";
 
-// import { useGetUserQuery, useGetRecipeQuery } from "../../redux/api";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { login, reset } from "../../features/auth/authSlice";
 
 const Login = () => {
-  const defaultDataStructure = {
-    id: null,
-    email: "",
-    password: "",
-    favRecipes: [],
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const { data, error, isLoading } = useGetUserQuery();
-  // const { data, error, isLoading } = useGetRecipeQuery();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
-  const [userList, setUserList] = useState([
-    {
-      id: 0,
-      email: "@",
-      password: "123",
-    },
-    {
-      id: 1,
-      email: "@1",
-      password: "123",
-    },
-  ]);
+  useEffect(() => {
+    if (isError) toast.error(message);
+    if (isSuccess || user) {
+      toast.success("Logged in");
+      navigate("/");
+    }
+    dispatch(reset);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const [loginValue, setLoginValue] = useState({ ...defaultDataStructure });
-  const [loggedUser, setLoggedUser] = useState({ ...defaultDataStructure });
+  const [formData, setFormData] = useState({
+    mail: "",
+    pass: "",
+  });
 
   const handleLoginInputChange = (e, type) => {
-    const newLoginValue = { ...loginValue };
-    if (type === "email") {
-      newLoginValue.email = e.target.value;
-    } else if (type === "password") {
-      newLoginValue.password = e.target.value;
+    const newFormData = { ...formData };
+
+    switch (type) {
+      case "email":
+        newFormData.email = e.target.value;
+        break;
+      case "password":
+        newFormData.password = e.target.value;
+        break;
+      default:
+        break;
     }
-    setLoginValue(newLoginValue);
+    setFormData(newFormData);
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    userList.map((user) => {
-      if (
-        user.email === loginValue.email &&
-        user.password === loginValue.password
-      ) {
-        setLoggedUser(user);
-      }
-    });
+    const { email, password } = formData;
+    const userData = { email, password };
+    dispatch(login(userData));
   };
 
   const loginForm = (
@@ -60,7 +61,7 @@ const Login = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Email"
-          value={loginValue.email}
+          value={formData.email}
           onChange={(e) => handleLoginInputChange(e, "email")}
         ></input>
       </div>
@@ -72,7 +73,7 @@ const Login = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Password"
-          value={loginValue.password}
+          value={formData.password}
           onChange={(e) => handleLoginInputChange(e, "password")}
         ></input>
         <button type="submit" className="btn btn-primary">
@@ -90,12 +91,6 @@ const Login = () => {
 
       <div className="row">
         <div className="col-md-6 offset-md-3">{loginForm}</div>
-      </div>
-
-      <div className="row">
-        <p>User: {loggedUser.email}</p>
-        <p>Password: {loggedUser.password}</p>
-        <p>Id: {loggedUser.id}</p>
       </div>
     </div>
   );

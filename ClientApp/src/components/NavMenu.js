@@ -13,6 +13,7 @@ import "./NavMenu.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const NavMenu = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const NavMenu = () => {
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
+    toast.success("Logged out");
     dispatch(logout());
     dispatch(reset());
     navigate("/");

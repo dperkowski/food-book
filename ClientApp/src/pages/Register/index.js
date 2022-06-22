@@ -18,14 +18,14 @@ const Register = () => {
   useEffect(() => {
     if (isError) toast.error(message);
     if (isSuccess || user) {
-      toast("Logged in");
+      toast.success("Logged in");
       navigate("/");
     }
     dispatch(reset);
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const [formData, setFormData] = useState({
-    name: "",
+    name: "lorem",
     mail: "",
     pass: "",
     pass2: "",
