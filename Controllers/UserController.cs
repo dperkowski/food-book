@@ -40,7 +40,8 @@ public class UserController : ControllerBase
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
         
-        return Ok(await _context.Users.ToListAsync());
+        string token = setUserToken(user);
+        return Ok(token);
 
     }
     
