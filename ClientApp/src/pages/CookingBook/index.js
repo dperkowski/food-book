@@ -19,24 +19,6 @@ const CookingBook = () => {
     (state) => state.recipe
   );
 
-  const [addFormData, setAddFormData] = useState({
-    name: "",
-    desc: "",
-    hardLevel: "",
-    time: "",
-    image: "",
-    userId: "",
-    userFavorites: "",
-  });
-
-  const defaultDataStructure = {
-    id: 0,
-    title: "",
-    desc: "",
-    isFav: false,
-    isVisible: true,
-  };
-
   const [recipeList, setRecipeList] = useState(recipe);
 
   useEffect(() => {
@@ -54,12 +36,17 @@ const CookingBook = () => {
     dispatch(reset);
   }, [recipe, isError, isSuccess, message, navigate, dispatch]);
 
-  const [recipeValue, setRecipeValue] = useState({
-    ...defaultDataStructure,
-  });
-  const [showFavorites, setShowFavorites] = useState(false);
-
   //ADD
+  const [addFormData, setAddFormData] = useState({
+    name: "",
+    desc: "",
+    hardLevel: "",
+    time: "",
+    image: "",
+    userId: "",
+    userFavorites: "",
+  });
+
   const handleAddRecipeInputChange = (e, type) => {
     const addFormDataCopy = { ...addFormData };
     console.log(e.target.value);
@@ -104,6 +91,37 @@ const CookingBook = () => {
     // setRecipeList(newRecipeList);
     // setNewRecipe(defaultDataStructure);
   };
+
+  const addRecipeForm = (
+    <form onSubmit={handleAddRecipeSubmit}>
+      <div className="input-group mb-3">
+        <span className="input-group-text">Title</span>
+        <input
+          type="text"
+          className="form-control"
+          aria-describedby="recipeTitle"
+          placeholder="Enter title"
+          value={addFormData.name}
+          onChange={(e) => handleAddRecipeInputChange(e, "name")}
+        ></input>
+      </div>
+
+      <div className="input-group mb-3">
+        <span className="input-group-text">Description</span>
+        <textarea
+          type="text"
+          className="form-control"
+          aria-describedby="recipeTitle"
+          placeholder="Enter title"
+          value={addFormData.description}
+          onChange={(e) => handleAddRecipeInputChange(e, "description")}
+        ></textarea>
+        <button className="btn btn-primary" type="submit">
+          Add
+        </button>
+      </div>
+    </form>
+  );
 
   //EDIT
   const [editingId, setEditingId] = useState();
@@ -151,15 +169,16 @@ const CookingBook = () => {
 
   const editRecipe = (e, id) => {
     e.preventDefault();
-    const newRecipeList = [...recipeList];
-    newRecipeList.map((recipe) => {
-      if (recipe.id === id) {
-        recipe.title = recipeValue.title;
-        recipe.desc = recipeValue.desc;
 
-        setRecipeList(newRecipeList);
-      }
-    });
+    // const newRecipeList = [...recipeList];
+    // newRecipeList.map((recipe) => {
+    //   if (recipe.id === id) {
+    //     recipe.title = recipeValue.title;
+    //     recipe.desc = recipeValue.desc;
+
+    //     setRecipeList(newRecipeList);
+    //   }
+    // });
 
     setEditingId(false);
   };
@@ -215,6 +234,7 @@ const CookingBook = () => {
   };
 
   //SEARCH
+  const [showFavorites, setShowFavorites] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const handleSearchClick = (e, type) => {
     const newRecipeList = [...recipeList];
@@ -318,49 +338,13 @@ const CookingBook = () => {
   );
 
   const recipeListMap = recipeList.map((recipe) => {
-    console.log(recipe);
-
     if (recipe.id === editingId) {
       return editForm(recipe);
     } else return singleRecipe(recipe);
   });
 
-  // Add form
-  const addRecipeForm = (
-    <form onSubmit={handleAddRecipeSubmit}>
-      <div className="input-group mb-3">
-        <span className="input-group-text">Title</span>
-        <input
-          type="text"
-          className="form-control"
-          aria-describedby="recipeTitle"
-          placeholder="Enter title"
-          value={addFormData.name}
-          onChange={(e) => handleAddRecipeInputChange(e, "name")}
-        ></input>
-      </div>
-
-      <div className="input-group mb-3">
-        <span className="input-group-text">Description</span>
-        <textarea
-          type="text"
-          className="form-control"
-          aria-describedby="recipeTitle"
-          placeholder="Enter title"
-          value={addFormData.description}
-          onChange={(e) => handleAddRecipeInputChange(e, "description")}
-        ></textarea>
-        <button className="btn btn-primary" type="submit">
-          Add
-        </button>
-      </div>
-    </form>
-  );
-
   return (
     <div className="container mb-4">
-      <button onClick={() => dispatch(loadRecipe())}>LOAD RECIPES</button>
-
       <div className="row">
         <div className="col-md-12">
           <h1 className="display-1 mb-4 text-center">Coking book</h1>
