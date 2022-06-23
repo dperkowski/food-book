@@ -16,6 +16,7 @@ const initialState = {
 export const addRecipe = createAsyncThunk(
   "recipe/addrecipe",
   async (recipe, thunkAPI) => {
+    console.log(recipe.token);
     try {
       return await recipeService.addRecipe(recipe);
     } catch (error) {

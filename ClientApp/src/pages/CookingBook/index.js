@@ -18,6 +18,7 @@ const CookingBook = () => {
   const { recipe, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
+  const { user } = useSelector((state) => state.auth);
 
   const [recipeList, setRecipeList] = useState(recipe);
 
@@ -74,6 +75,7 @@ const CookingBook = () => {
     e.preventDefault();
     const { name, description, hardLevel, time, image, userId, userFavorites } =
       addFormData;
+    const token = user.token;
     const recipeData = {
       name,
       description,
@@ -82,7 +84,9 @@ const CookingBook = () => {
       image,
       userId,
       userFavorites,
+      token,
     };
+
     dispatch(addRecipe(recipeData));
 
     // const newRecipeList = [...recipeList];
