@@ -28,6 +28,16 @@ const CookingBook = () => {
     userFavorite: "",
   });
 
+  const [addFormData, setAddFormData] = useState({
+    name: "",
+    description: "",
+    hardLevel: "",
+    time: "",
+    image: "",
+    userId: "",
+    userFavorite: "",
+  });
+
   useEffect(() => {
     dispatch(loadRecipe());
   }, []);
@@ -80,26 +90,26 @@ const CookingBook = () => {
 
   //ADD
   const handleAddRecipeInputChange = (e, type) => {
-    const formDataCopy = { ...formData };
-
+    const addFormDataCopy = { ...addFormData };
+    console.log(e.target.value);
     switch (type) {
       case "name":
-        formDataCopy.title = e.target.value;
+        addFormDataCopy.name = e.target.value;
         break;
       case "description":
-        formDataCopy.description = e.target.value;
+        addFormDataCopy.description = e.target.value;
         break;
       case "hardLevel":
-        formDataCopy.hardLevel = e.target.value;
+        addFormDataCopy.hardLevel = e.target.value;
         break;
       case "time":
-        formDataCopy.time = e.target.value;
+        addFormDataCopy.time = e.target.value;
         break;
 
       default:
         break;
     }
-    setFormData(formDataCopy);
+    setAddFormData(addFormDataCopy);
   };
 
   const handleAddRecipeSubmit = (e) => {
@@ -329,6 +339,7 @@ const CookingBook = () => {
     } else return singleRecipe(recipe);
   });
 
+  // Add form
   const addRecipeForm = (
     <form onSubmit={handleAddRecipeSubmit}>
       <div className="input-group mb-3">
@@ -338,7 +349,7 @@ const CookingBook = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Enter title"
-          value={newRecipe.title}
+          value={addFormData.name}
           onChange={(e) => handleAddRecipeInputChange(e, "name")}
         ></input>
       </div>
@@ -350,7 +361,7 @@ const CookingBook = () => {
           className="form-control"
           aria-describedby="recipeTitle"
           placeholder="Enter title"
-          value={newRecipe.description}
+          value={addFormData.description}
           onChange={(e) => handleAddRecipeInputChange(e, "description")}
         ></textarea>
         <button className="btn btn-primary" type="submit">

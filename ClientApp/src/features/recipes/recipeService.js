@@ -2,10 +2,9 @@ import axios from "axios";
 
 const API_URL = "/api/recipe/";
 
-// Register recipe
-const register = async (recipeData) => {
-  const response = await axios.post(API_URL + "getall", recipeData);
-
+// addRecipe
+const addRecipe = async (recipeData) => {
+  const response = await axios.post(API_URL + "add", recipeData);
   if (response.data) {
     localStorage.setItem("recipe", JSON.stringify(response.data));
   }
@@ -29,7 +28,7 @@ const deleterecipe = () => {
 };
 
 const recipe = {
-  register,
+  addRecipe,
   loadRecipe,
   deleterecipe,
 };
