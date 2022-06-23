@@ -12,9 +12,6 @@ const UserProfile = () => {
     (state) => state.auth
   );
 
-  const [loggedUser, setLoggedUser] = useState(...user);
-
-  console.log(user);
   return (
     <div className="container mt-auto">
       <div className="row">
@@ -22,7 +19,7 @@ const UserProfile = () => {
       </div>
 
       <div className="row">
-        <h2 className="display-2 mb-4 text-center">Hello, {loggedUser.name}</h2>
+        <h2 className="display-2 mb-4 text-center">Hello, {user.name}</h2>
       </div>
     </div>
   );

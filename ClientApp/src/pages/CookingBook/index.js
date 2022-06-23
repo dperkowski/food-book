@@ -240,18 +240,18 @@ const CookingBook = () => {
   //SEARCH
   const [showFavorites, setShowFavorites] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+
   const handleSearchClick = (e, type) => {
     const newRecipeList = [...recipeList];
 
     if (type === "search") {
       e.preventDefault();
-
       newRecipeList.map((recipe) => {
-        if (recipe.title.toLowerCase().includes(searchValue.toLowerCase())) {
-          recipe.isVisible = true;
+        if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
+          // recipe.isVisible = true;
           setRecipeList(newRecipeList);
         } else {
-          recipe.isVisible = false;
+          // recipe.isVisible = false;
           setRecipeList(newRecipeList);
         }
       });

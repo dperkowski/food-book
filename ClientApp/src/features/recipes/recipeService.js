@@ -2,9 +2,8 @@ import axios from "axios";
 
 const API_URL = "/api/recipe/";
 
-// addRecipe
+// Add Recipe
 const addRecipe = async (recipeData) => {
-  console.log(recipeData.token);
   const response = await axios.post(API_URL + "add", recipeData, {
     headers: {
       Authorization: "Bearer " + recipeData.token,
@@ -19,7 +18,7 @@ const addRecipe = async (recipeData) => {
   return response.data;
 };
 
-// loadRecipe
+// Load recipe
 const loadRecipe = async () => {
   const response = await axios.get(API_URL + "getall");
   if (response.data) {
@@ -29,15 +28,15 @@ const loadRecipe = async () => {
   return response.data;
 };
 
-// Logout
-const deleterecipe = () => {
+// Delete recipe
+const deleteRecipe = () => {
   localStorage.removeItem("recipe");
 };
 
 const recipe = {
   addRecipe,
   loadRecipe,
-  deleterecipe,
+  deleteRecipe,
 };
 
 export default recipe;
