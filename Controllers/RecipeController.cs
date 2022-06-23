@@ -30,6 +30,7 @@ public class RecipeController : ControllerBase
         {
             id = DateTime.Now.Ticks,
             name = request.name,
+            desc = request. desc,
             hardLevel = request.hardLevel,
             time = request.time,
             image = request.image,
