@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
@@ -14,10 +14,19 @@ import {
 const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { recipes, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipes
   );
+
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    hardLevel: "",
+    time: "",
+    image: "",
+    userId: "",
+    userFavorite: "",
+  });
 
   useEffect(() => {
     dispatch(loadRecipe());
@@ -56,22 +65,6 @@ const CookingBook = () => {
       title: "Recipe title 1",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eligendi modi accusantium, consequatur consequuntur, fuga culpa obcaecati quis tenetur eius eos unde. Omnis, illo. Vero sapiente quisquam numquam?",
-      isFav: false,
-      isVisible: true,
-    },
-    {
-      id: 2,
-      title: "Recipe title 2",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eligendi modi accusantium, consequatur consequuntur, fuga culpa obcaecati quis tenetur eius eos unde. Omnis, illo. Vero sapiente quisquam numquam?",
-      isFav: true,
-      isVisible: true,
-    },
-    {
-      id: 3,
-      title: "Recipe title 3",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eligendi modi accusantium, consequatur consequuntur, fuga culpa obcaecati quis tenetur eius eos unde. Omnis, illo. Vero sapiente quisquam numquam?",
       isFav: true,
       isVisible: true,
     },
@@ -87,27 +80,44 @@ const CookingBook = () => {
 
   //ADD
   const handleAddRecipeInputChange = (e, type) => {
-    const newRecipeCopy = { ...newRecipe };
+    const formDataCopy = { ...formData };
 
-    if (type === "title") {
-      newRecipeCopy.title = e.target.value;
-      setNewRecipe(newRecipeCopy);
-    } else if (type === "description") {
-      newRecipeCopy.description = e.target.value;
-      setNewRecipe(newRecipeCopy);
+    switch (type) {
+      case "name":
+        formDataCopy.title = e.target.value;
+        break;
+      case "description":
+        formDataCopy.description = e.target.value;
+        break;
+      case "hardLevel":
+        formDataCopy.hardLevel = e.target.value;
+        break;
+      case "time":
+        formDataCopy.time = e.target.value;
+        break;
+
+      default:
+        break;
     }
-    console.log(newRecipeCopy);
+    setFormData(formDataCopy);
   };
 
-  const addRecipe = (e) => {
+  const handleAddRecipeSubmit = (e) => {
     e.preventDefault();
-    const newRecipeList = [...recipeList];
-    setNewRecipe((prev) => (prev.id = newRecipeList.length));
-    newRecipeList.push(newRecipe);
-    setRecipeList(newRecipeList);
-    setNewRecipe(defaultDataStructure);
+    const { name, description, hardLevel, time } = formData;
+    const recipeData = {
+      name,
+      description,
+      hardLevel,
+      time,
+    };
+    dispatch(addRecipe(recipeData));
 
-    console.log(newRecipeList);
+    // const newRecipeList = [...recipeList];
+    // setNewRecipe((prev) => (prev.id = newRecipeList.length));
+    // newRecipeList.push(newRecipe);
+    // setRecipeList(newRecipeList);
+    // setNewRecipe(defaultDataStructure);
   };
 
   //EDIT
@@ -123,15 +133,25 @@ const CookingBook = () => {
   };
 
   const handleEditorInputChange = (e, type) => {
-    const recipeValueCopy = { ...recipeValue };
-    if (type === "title") {
-      recipeValueCopy.title = e.target.value;
-      setRecipeValue(recipeValueCopy);
-    } else if (type === "description") {
-      recipeValueCopy.description = e.target.value;
-      setRecipeValue(recipeValueCopy);
+    const formDataCopy = { ...formData };
+
+    switch (type) {
+      case "name":
+        formDataCopy.name = e.target.value;
+        break;
+      case "description":
+        formDataCopy.description = e.target.value;
+        break;
+      case "hardLevel":
+        formDataCopy.hardLevel = e.target.value;
+        break;
+      case "time":
+        formDataCopy.time = e.target.value;
+        break;
+      default:
+        break;
     }
-    console.log(recipeValueCopy);
+    setFormData(formDataCopy);
   };
 
   const editRecipe = (e, id) => {
@@ -248,7 +268,7 @@ const CookingBook = () => {
             className="form-control"
             aria-describedby="Title"
             placeholder="Enter title"
-            value={recipeValue.title}
+            value={formData.name}
             onChange={(e) => handleEditorInputChange(e, "title")}
           ></input>
         </div>
@@ -260,7 +280,7 @@ const CookingBook = () => {
             className="form-control"
             aria-describedby="Description"
             placeholder="Enter title"
-            value={recipeValue.description}
+            value={formData.name}
             onChange={(e) => handleEditorInputChange(e, "description")}
           ></textarea>
           <button type="submit" className="btn btn-primary">
@@ -310,7 +330,7 @@ const CookingBook = () => {
   });
 
   const addRecipeForm = (
-    <form onSubmit={addRecipe}>
+    <form onSubmit={handleAddRecipeSubmit}>
       <div className="input-group mb-3">
         <span className="input-group-text">Title</span>
         <input
@@ -319,7 +339,7 @@ const CookingBook = () => {
           aria-describedby="recipeTitle"
           placeholder="Enter title"
           value={newRecipe.title}
-          onChange={(e) => handleAddRecipeInputChange(e, "title")}
+          onChange={(e) => handleAddRecipeInputChange(e, "name")}
         ></input>
       </div>
 

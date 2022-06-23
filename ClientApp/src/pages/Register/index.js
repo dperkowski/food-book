@@ -25,7 +25,7 @@ const Register = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const [formData, setFormData] = useState({
-    name: "lorem",
+    name: "",
     mail: "",
     pass: "",
     pass2: "",
@@ -35,6 +35,9 @@ const Register = () => {
     const newRegisterValue = { ...formData };
 
     switch (type) {
+      case "name":
+        newRegisterValue.name = e.target.value;
+        break;
       case "email":
         newRegisterValue.mail = e.target.value;
         break;
@@ -67,14 +70,24 @@ const Register = () => {
     }
   };
 
-  const loginForm = (
+  const form = (
     <form onSubmit={handleLoginSubmit}>
+      <div className="input-group mb-3">
+        <span class="input-group-text">Name</span>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => handleLoginInputChange(e, "name")}
+        ></input>
+      </div>
+
       <div className="input-group mb-3">
         <span class="input-group-text">Email</span>
         <input
           type="text"
           className="form-control"
-          aria-describedby="recipeTitle"
           placeholder="Email"
           value={formData.mail}
           onChange={(e) => handleLoginInputChange(e, "email")}
@@ -86,7 +99,6 @@ const Register = () => {
         <input
           type="password"
           className="form-control"
-          aria-describedby="recipeTitle"
           placeholder="Password"
           value={formData.pass}
           onChange={(e) => handleLoginInputChange(e, "password")}
@@ -117,7 +129,7 @@ const Register = () => {
       </div>
 
       <div className="row">
-        <div className="col-md-6 offset-md-3">{loginForm}</div>
+        <div className="col-md-6 offset-md-3">{form}</div>
       </div>
     </div>
   );

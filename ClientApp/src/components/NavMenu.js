@@ -59,15 +59,15 @@ const NavMenu = () => {
             navbar
           >
             <ul className="navbar-nav flex-grow">
-              {menuItem("/", "Home")}
-              {menuItem("/counter", "Counter")}
-              {menuItem("/fetch-data", "Fetch data")}
-              {menuItem("/cooking-book", "Cooking Book")}
-              {menuItem("/user-profile", "User Profile")}
               {user ? (
-                <button className="btn btn-primary" onClick={onLogout}>
-                  Logout
-                </button>
+                <>
+                  <>
+                    <>{menuItem("/user-profile", "User Profile")}</>
+                    <button className="btn btn-primary" onClick={onLogout}>
+                      Logout
+                    </button>
+                  </>
+                </>
               ) : (
                 <>
                   <>{menuItem("/register", "Register")}</>

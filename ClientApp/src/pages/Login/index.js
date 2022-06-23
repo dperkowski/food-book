@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { login, reset } from "../../features/auth/authSlice";
@@ -29,7 +29,7 @@ const Login = () => {
     pass: "",
   });
 
-  const handleLoginInputChange = (e, type) => {
+  const handleInputChange = (e, type) => {
     const newFormData = { ...formData };
 
     switch (type) {
@@ -45,15 +45,15 @@ const Login = () => {
     setFormData(newFormData);
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = formData;
     const userData = { email, password };
     dispatch(login(userData));
   };
 
-  const loginForm = (
-    <form onSubmit={handleLoginSubmit}>
+  const form = (
+    <form onSubmit={handleSubmit}>
       <div className="input-group mb-3">
         <span class="input-group-text">Email</span>
         <input
@@ -62,7 +62,7 @@ const Login = () => {
           aria-describedby="recipeTitle"
           placeholder="Email"
           value={formData.email}
-          onChange={(e) => handleLoginInputChange(e, "email")}
+          onChange={(e) => handleInputChange(e, "email")}
         ></input>
       </div>
 
@@ -74,7 +74,7 @@ const Login = () => {
           aria-describedby="recipeTitle"
           placeholder="Password"
           value={formData.password}
-          onChange={(e) => handleLoginInputChange(e, "password")}
+          onChange={(e) => handleInputChange(e, "password")}
         ></input>
         <button type="submit" className="btn btn-primary">
           Login
@@ -90,7 +90,7 @@ const Login = () => {
       </div>
 
       <div className="row">
-        <div className="col-md-6 offset-md-3">{loginForm}</div>
+        <div className="col-md-6 offset-md-3">{form}</div>
       </div>
     </div>
   );

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-const UserProfile = () => {
-  const defaultDataStructure = {
-    id: 164,
-    email: "test@test.pl",
-    password: "123123",
-    favRecipes: [1, 2, 3, 4, 5],
-  };
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-  const [loggedUser, setLoggedUser] = useState({ ...defaultDataStructure });
+import { login, reset } from "../../features/auth/authSlice";
+
+const UserProfile = () => {
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  const [loggedUser, setLoggedUser] = useState(...user);
 
   return (
     <div className="container mt-auto">
@@ -17,9 +21,7 @@ const UserProfile = () => {
       </div>
 
       <div className="row">
-        <h2 className="display-2 mb-4 text-center">
-          Hello, {loggedUser.email}
-        </h2>
+        <h2 className="display-2 mb-4 text-center">Hello, {loggedUser.name}</h2>
       </div>
     </div>
   );

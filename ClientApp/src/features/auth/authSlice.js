@@ -16,7 +16,6 @@ const initialState = {
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
-    console.log("auth slice test");
     try {
       return await authService.register(user);
     } catch (error) {
@@ -33,7 +32,6 @@ export const register = createAsyncThunk(
 
 // Login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  console.log("auth slice test");
   try {
     return await authService.login(user);
   } catch (error) {
