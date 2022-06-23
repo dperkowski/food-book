@@ -14,29 +14,30 @@ import {
 const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { recipe, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    hardLevel: "",
-    time: "",
-    image: "",
-    userId: "",
-    userFavorite: "",
-  });
-
   const [addFormData, setAddFormData] = useState({
     name: "",
-    description: "",
+    desc: "",
     hardLevel: "",
     time: "",
     image: "",
     userId: "",
-    userFavorite: "",
+    userFavorites: "",
   });
+
+  const defaultDataStructure = {
+    id: 0,
+    title: "",
+    desc: "",
+    isFav: false,
+    isVisible: true,
+  };
+
+  const [recipeList, setRecipeList] = useState(recipe);
 
   useEffect(() => {
     dispatch(loadRecipe());
@@ -53,37 +54,7 @@ const CookingBook = () => {
     dispatch(reset);
   }, [recipe, isError, isSuccess, message, navigate, dispatch]);
 
-  const defaultDataStructure = {
-    id: 0,
-    title: "",
-    description: "",
-    isFav: false,
-    isVisible: true,
-  };
-
-  const [recipeList, setRecipeList] = useState([
-    {
-      id: 0,
-      title: "Recipe title 0",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eligendi modi accusantium, consequatur consequuntur, fuga culpa obcaecati quis tenetur eius eos unde. Omnis, illo. Vero sapiente quisquam numquam?",
-      isFav: false,
-      isVisible: true,
-    },
-    {
-      id: 1,
-      title: "Recipe title 1",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam optio maiores eligendi modi accusantium, consequatur consequuntur, fuga culpa obcaecati quis tenetur eius eos unde. Omnis, illo. Vero sapiente quisquam numquam?",
-      isFav: true,
-      isVisible: true,
-    },
-  ]);
-  const [editingId, setEditingId] = useState();
   const [recipeValue, setRecipeValue] = useState({
-    ...defaultDataStructure,
-  });
-  const [newRecipe, setNewRecipe] = useState({
     ...defaultDataStructure,
   });
   const [showFavorites, setShowFavorites] = useState(false);
@@ -114,12 +85,16 @@ const CookingBook = () => {
 
   const handleAddRecipeSubmit = (e) => {
     e.preventDefault();
-    const { name, description, hardLevel, time } = formData;
+    const { name, description, hardLevel, time, image, userId, userFavorites } =
+      addFormData;
     const recipeData = {
       name,
       description,
       hardLevel,
       time,
+      image,
+      userId,
+      userFavorites,
     };
     dispatch(addRecipe(recipeData));
 
@@ -131,37 +106,47 @@ const CookingBook = () => {
   };
 
   //EDIT
+  const [editingId, setEditingId] = useState();
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+    desc: "",
+    hardLevel: "",
+    time: "",
+    image: "",
+    userId: "",
+    userFavorite: "",
+  });
+
   const enableEditRecipe = (id) => {
     const newRecipeList = [...recipeList];
     newRecipeList.map((recipe) => {
       if (recipe.id === id) {
-        console.log(recipe);
-        setRecipeValue(recipe);
+        setEditFormData(recipe);
       }
     });
     setEditingId(id);
   };
 
-  const handleEditorInputChange = (e, type) => {
-    const formDataCopy = { ...formData };
+  const handleEditInputChange = (e, type) => {
+    const editFormDataCopy = { ...editFormData };
 
     switch (type) {
       case "name":
-        formDataCopy.name = e.target.value;
+        editFormDataCopy.name = e.target.value;
         break;
-      case "description":
-        formDataCopy.description = e.target.value;
+      case "desc":
+        editFormDataCopy.desc = e.target.value;
         break;
       case "hardLevel":
-        formDataCopy.hardLevel = e.target.value;
+        editFormDataCopy.hardLevel = e.target.value;
         break;
       case "time":
-        formDataCopy.time = e.target.value;
+        editFormDataCopy.time = e.target.value;
         break;
       default:
         break;
     }
-    setFormData(formDataCopy);
+    setEditFormData(editFormDataCopy);
   };
 
   const editRecipe = (e, id) => {
@@ -170,7 +155,7 @@ const CookingBook = () => {
     newRecipeList.map((recipe) => {
       if (recipe.id === id) {
         recipe.title = recipeValue.title;
-        recipe.description = recipeValue.description;
+        recipe.desc = recipeValue.desc;
 
         setRecipeList(newRecipeList);
       }
@@ -178,6 +163,39 @@ const CookingBook = () => {
 
     setEditingId(false);
   };
+
+  const editForm = (recipe) => (
+    <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
+      <form onSubmit={(e) => editRecipe(e, recipe.id)}>
+        <div className="input-group mb-3">
+          <span className="input-group-text">title</span>
+          <input
+            type="text"
+            className="form-control"
+            aria-describedby="Title"
+            placeholder="Enter title"
+            value={editFormData.name}
+            onChange={(e) => handleEditInputChange(e, "name")}
+          ></input>
+        </div>
+
+        <div className="input-group">
+          <span className="input-group-text">Description</span>
+          <textarea
+            type="text"
+            className="form-control"
+            aria-describedby="Description"
+            placeholder="Enter title"
+            value={editFormData.desc}
+            onChange={(e) => handleEditInputChange(e, "desc")}
+          ></textarea>
+          <button type="submit" className="btn btn-primary">
+            Done
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 
   // DELETE
   const deleteRecipe = (id) => {
@@ -190,7 +208,7 @@ const CookingBook = () => {
     const newRecipeList = [...recipeList];
     newRecipeList.map((recipe) => {
       if (recipe.id === id) {
-        recipe.isFav = !recipe.isFav;
+        // recipe.isFav = !recipe.isFav;
         setRecipeList(newRecipeList);
       }
     });
@@ -218,26 +236,26 @@ const CookingBook = () => {
     }
   };
 
-  useEffect(() => {
-    const newRecipeList = [...recipeList];
-    if (showFavorites) {
-      newRecipeList.map((recipe) => {
-        if (recipe.isFav) {
-          recipe.isVisible = true;
-          setRecipeList(newRecipeList);
-        } else {
-          recipe.isVisible = false;
-          setRecipeList(newRecipeList);
-        }
-      });
-    } else if (!showFavorites) {
-      newRecipeList.map((recipe) => {
-        recipe.isVisible = true;
-        setRecipeList(newRecipeList);
-      });
-    }
-    console.log(showFavorites);
-  }, [showFavorites]);
+  // useEffect(() => {
+  //   const newRecipeList = [...recipeList];
+  //   if (showFavorites) {
+  //     newRecipeList.map((recipe) => {
+  //       if (recipe.isFav) {
+  //         recipe.isVisible = true;
+  //         setRecipeList(newRecipeList);
+  //       } else {
+  //         recipe.isVisible = false;
+  //         setRecipeList(newRecipeList);
+  //       }
+  //     });
+  //   } else if (!showFavorites) {
+  //     newRecipeList.map((recipe) => {
+  //       recipe.isVisible = true;
+  //       setRecipeList(newRecipeList);
+  //     });
+  //   }
+  //   console.log(showFavorites);
+  // }, [showFavorites]);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
@@ -268,72 +286,40 @@ const CookingBook = () => {
     </form>
   );
 
-  const editForm = (recipe) => (
-    <div key={recipe.id} className="p-4 mb-3 bg-dark text-light rounded-3">
-      <form onSubmit={(e) => editRecipe(e, recipe.id)}>
-        <div className="input-group mb-3">
-          <span className="input-group-text">title</span>
-          <input
-            type="text"
-            className="form-control"
-            aria-describedby="Title"
-            placeholder="Enter title"
-            value={formData.name}
-            onChange={(e) => handleEditorInputChange(e, "title")}
-          ></input>
-        </div>
+  const singleRecipe = (recipe) => (
+    <div
+      key={recipe.id}
+      className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
+    >
+      <h2>{recipe.name}</h2>
+      <p>{recipe.desc}</p>
 
-        <div className="input-group">
-          <span className="input-group-text">Description</span>
-          <textarea
-            type="text"
-            className="form-control"
-            aria-describedby="Description"
-            placeholder="Enter title"
-            value={formData.name}
-            onChange={(e) => handleEditorInputChange(e, "description")}
-          ></textarea>
-          <button type="submit" className="btn btn-primary">
-            Done
-          </button>
-        </div>
-      </form>
+      <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button
+          // className={recipe.isFav ? "btn btn-success" : "btn btn-primary"}
+          onClick={() => setFavRecipe(recipe.id)}
+        >
+          Favorite
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => enableEditRecipe(recipe.id)}
+        >
+          Edit
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => deleteRecipe(recipe.id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 
-  const singleRecipe = (recipe) =>
-    recipe.isVisible ? (
-      <div
-        key={recipe.id}
-        className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
-      >
-        <h2>{recipe.title}</h2>
-        <p>{recipe.description}</p>
-
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button
-            className={recipe.isFav ? "btn btn-success" : "btn btn-primary"}
-            onClick={() => setFavRecipe(recipe.id)}
-          >
-            Favorite
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => enableEditRecipe(recipe.id)}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => deleteRecipe(recipe.id)}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    ) : null;
-
   const recipeListMap = recipeList.map((recipe) => {
+    console.log(recipe);
+
     if (recipe.id === editingId) {
       return editForm(recipe);
     } else return singleRecipe(recipe);

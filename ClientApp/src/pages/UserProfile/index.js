@@ -14,6 +14,7 @@ const UserProfile = () => {
 
   const [loggedUser, setLoggedUser] = useState(...user);
 
+  console.log(user);
   return (
     <div className="container mt-auto">
       <div className="row">

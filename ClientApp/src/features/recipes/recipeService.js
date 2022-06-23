@@ -4,7 +4,12 @@ const API_URL = "/api/recipe/";
 
 // addRecipe
 const addRecipe = async (recipeData) => {
-  const response = await axios.post(API_URL + "add", recipeData);
+  const response = await axios.post(API_URL + "add", recipeData, {
+    // headers: {
+    //   Authorization: "Bearer " + token,
+    //   "Content-Type": "application/json",
+    // },
+  });
   if (response.data) {
     localStorage.setItem("recipe", JSON.stringify(response.data));
   }
