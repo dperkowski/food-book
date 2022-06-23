@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using food_book.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace food_book.Controllers;
 
@@ -8,27 +10,37 @@ namespace food_book.Controllers;
 public class RecipeController : ControllerBase
 {
     private readonly ILogger<RecipeController> _logger;
-
-    public RecipeController(ILogger<RecipeController> logger)
+    private readonly DataContext _context;
+    public RecipeController(ILogger<RecipeController> logger,  DataContext context)
     {
         _logger = logger;
+        _context = context;
+    }
+    
+    [HttpGet("getAll")]
+    public async Task<ActionResult<List<Recipe>>> GetAll()
+    {
+        return Ok(await _context.Recipes.ToListAsync());
     }
 
-    [HttpGet(Name = "test"), Authorize]
-    public IEnumerable<Recipe> Get()
+    [HttpPost("add"), Authorize]
+    public async Task<ActionResult<string>> Register(RecipeAddDto request)
     {
-        var tempCat = new List<int>();
-        tempCat.Add(1);        
-        tempCat.Add(2);
-            
-        return Enumerable.Range(1, 5).Select(index => new Recipe
+        var recipe = new UserRecipe()
         {
-            name = "Test" + index,
-            categories = tempCat,
-            hardLevel = Random.Shared.Next(1, 5),
-            time = Random.Shared.Next(15,90),
-            image = "https://picsum.photos/200/30" + index
-        })
-        .ToArray();
+            id = DateTime.Now.Ticks,
+            name = request.name,
+            hardLevel = request.hardLevel,
+            time = request.time,
+            image = request.image,
+            userId = request.userId,
+            userFavorite = request.userFavorite,
+            categories = new []{1}
+        };
+
+        _context.UserRecipes.Add(recipe);
+        await _context.SaveChangesAsync();
+
+        return Ok("Successful");
     }
 }

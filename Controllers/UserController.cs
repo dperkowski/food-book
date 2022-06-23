@@ -24,7 +24,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<User>> Register(UserRegisterDto request)
+    public async Task<ActionResult<object[]>> Register(UserRegisterDto request)
     {
         CreatePassHash(request.pass, out byte[] passHash, out byte[] passSalt);
         var user = new User
@@ -40,13 +40,14 @@ public class UserController : ControllerBase
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
         
-        return Ok(await _context.Users.ToListAsync());
+        string token = setUserToken(user);
+        return Ok(new object[] {user.id, user.name, user.mail, token});
 
     }
     
 
     [HttpPost("login")]
-    public async Task<ActionResult<string>> Login(UserLoginDto request)
+    public async Task<ActionResult<object[]>> Login(UserLoginDto request)
     {
         var user = await _context.Users.Where(User => User.mail == request.mail).FirstAsync();
         
@@ -56,7 +57,7 @@ public class UserController : ControllerBase
         }
 
         string token = setUserToken(user);
-        return Ok(token);
+        return Ok(new object[] {user.id, user.name, user.mail, token});
     }
 
     private string setUserToken(User user)
