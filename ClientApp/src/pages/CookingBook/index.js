@@ -341,7 +341,7 @@ const CookingBook = () => {
     </div>
   );
 
-  const recipeListMap = recipeList.map((recipe) => {
+  const recipeListMap = [...recipeList].map((recipe) => {
     if (recipe.id === editingId) {
       return editForm(recipe);
     } else return singleRecipe(recipe);
