@@ -320,7 +320,7 @@ const CookingBook = () => {
 
       <div className="d-grid gap-2 d-md-flex justify-content-md-end">
         <button
-          // className={recipe.isFav ? "btn btn-success" : "btn btn-primary"}
+          className="btn btn-primary"
           onClick={() => setFavRecipe(recipe.id)}
         >
           Favorite
@@ -341,7 +341,7 @@ const CookingBook = () => {
     </div>
   );
 
-  const recipeListMap = recipeList.map((recipe) => {
+  const recipeListMap = [...recipeList].map((recipe) => {
     if (recipe.id === editingId) {
       return editForm(recipe);
     } else return singleRecipe(recipe);
