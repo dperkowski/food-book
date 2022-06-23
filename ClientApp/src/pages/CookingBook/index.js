@@ -9,13 +9,13 @@ import {
   loadRecipe,
   addRecipe,
   reset,
-} from "../../features/recipes/recipesSlice";
+} from "../../features/recipes/recipeSlice";
 
 const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { recipes, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.recipes
+  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.recipe
   );
 
   const [formData, setFormData] = useState({
@@ -37,11 +37,11 @@ const CookingBook = () => {
       toast.error(message);
       toast.success("Recipes not loaded");
     }
-    if (isSuccess || recipes) {
+    if (isSuccess || recipe) {
       toast.success("Recipes loaded");
     }
     dispatch(reset);
-  }, [recipes, isError, isSuccess, message, navigate, dispatch]);
+  }, [recipe, isError, isSuccess, message, navigate, dispatch]);
 
   const defaultDataStructure = {
     id: 0,

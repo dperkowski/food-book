@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import recipesService from "./recipesService";
+import recipeService from "./recipeService";
 
-// Get recipes from localStorage
-const recipes = JSON.parse(localStorage.getItem("recipes"));
+// Get recipe from localStorage
+const recipe = JSON.parse(localStorage.getItem("recipe"));
 
 const initialState = {
-  recipes: recipes ? recipes : null,
+  recipe: recipe ? recipe : null,
   isError: false,
   isSuccess: false,
   osLoading: false,
@@ -14,10 +14,10 @@ const initialState = {
 
 // addRecipe
 export const addRecipe = createAsyncThunk(
-  "recipes/addrecipes",
-  async (recipes, thunkAPI) => {
+  "recipe/addrecipe",
+  async (recipe, thunkAPI) => {
     try {
-      return await recipesService.addRecipe(recipes);
+      return await recipeService.addRecipe(recipe);
     } catch (error) {
       const message =
         (error.response &&
@@ -32,10 +32,10 @@ export const addRecipe = createAsyncThunk(
 
 // loadRecipe
 export const loadRecipe = createAsyncThunk(
-  "recipes/loadrecipes",
-  async (recipes, thunkAPI) => {
+  "recipe/loadrecipe",
+  async (recipe, thunkAPI) => {
     try {
-      return await recipesService.loadRecipe(recipes);
+      return await recipeService.loadRecipe(recipe);
     } catch (error) {
       const message =
         (error.response &&
@@ -48,13 +48,12 @@ export const loadRecipe = createAsyncThunk(
   }
 );
 
-// Delete recipes
-export const deleteRecipes = createAsyncThunk(
-  "recipes/deleterecipe",
-  async () => recipesService.deleteRecipes()
+// Delete recipe
+export const deleterecipe = createAsyncThunk("recipe/deleterecipe", async () =>
+  recipeService.deleterecipe()
 );
 
-export const recipesSlice = createSlice({
+export const recipeSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -73,13 +72,13 @@ export const recipesSlice = createSlice({
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccessS = false;
-        state.recipes = action.payload;
+        state.recipe = action.payload;
       })
       .addCase(addRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.recipes = null;
+        state.recipe = null;
       })
       .addCase(loadRecipe.pending, (state) => {
         state.isLoading = true;
@@ -87,19 +86,19 @@ export const recipesSlice = createSlice({
       .addCase(loadRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccessS = false;
-        state.recipes = action.payload;
+        state.recipe = action.payload;
       })
       .addCase(loadRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.recipes = null;
+        state.recipe = null;
       })
-      .addCase(deleteRecipes.fulfilled, (state) => {
-        state.recipes = null;
+      .addCase(deleterecipe.fulfilled, (state) => {
+        state.recipe = null;
       });
   },
 });
 
-export const { reset } = recipesSlice.actions;
-export default recipesSlice.reducer;
+export const { reset } = recipeSlice.actions;
+export default recipeSlice.reducer;
