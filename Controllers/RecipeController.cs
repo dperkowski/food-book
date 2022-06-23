@@ -23,19 +23,15 @@ public class RecipeController : ControllerBase
         return Ok(await _context.Recipes.ToListAsync());
     }
 
-    [HttpGet("getUserAll")]
+    [HttpGet("getUserAll/{userId}")]
     public async Task<ActionResult<List<UserRecipe>>> GetUserAll(long userId)
     {
-        return Ok(await UserRecipeConn(userId));
+        return Ok(await _context.UserRecipes.Where(recipe => recipe.userId == userId).ToListAsync());
     }
-
-    private async Task<ActionResult<List<UserRecipe>>> UserRecipeConn(long userId)
-    {
-        return await _context.UserRecipes.Where(recipe => recipe.userId == userId).ToListAsync();
-    }
+    
 
     [HttpPost("add"), Authorize]
-    public async Task<ActionResult<string>> Add(RecipeAddDto request, long userId)
+    public async Task<ActionResult<string>> Add(RecipeAddDto request)
     {
         var recipe = new UserRecipe()
         {
@@ -60,12 +56,12 @@ public class RecipeController : ControllerBase
             return BadRequest("Ops... Something went wrong");
         }
 
-        var restUserRecepies = await UserRecipeConn(userId);
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe added"});;
     }
 
     [HttpPut("edit"), Authorize]
-    public async Task<ActionResult<object>> Edit(RecipeEditDto request, long userId)
+    public async Task<ActionResult<object>> Edit(RecipeEditDto request)
     {
         var recipe = await _context.UserRecipes.FindAsync(request.id);
 
@@ -80,20 +76,20 @@ public class RecipeController : ControllerBase
         recipe.userFavorite = request.userFavorite;
         recipe.categories = new []{1};
         
-        var restUserRecepies = await UserRecipeConn(userId);
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe edited"});
     }
     
     [HttpDelete("remove"), Authorize]
-    public async Task<ActionResult<UserRecipeResponseDto>> Delete(long id, long userId)
+    public async Task<ActionResult<UserRecipeResponseDto>> Delete(UserRecipeDeleteDto request)
     {
-        var recipe = await _context.UserRecipes.FindAsync(id);
+        var recipe = await _context.UserRecipes.FindAsync(request.id);
 
         if (recipe == null) return BadRequest("Recipe not found");
         
         _context.UserRecipes.Remove(recipe);
 
-        var restUserRecepies = await UserRecipeConn(userId);
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe removed"});
     }
 }
