@@ -67,14 +67,22 @@ public class RecipeController : ControllerBase
 
         if (recipe == null) return BadRequest("Recipe not found");
 
-        recipe.name = request.name;
-        recipe.desc = request.desc;
-        recipe.hardLevel = request.hardLevel;
-        recipe.time = request.time;
-        recipe.image = request.image;
-        recipe.userId = request.userId;
-        recipe.userFavorite = request.userFavorite;
-        recipe.categories = new []{1};
+        try
+        {
+            recipe.name = request.name;
+            recipe.desc = request.desc;
+            recipe.hardLevel = request.hardLevel;
+            recipe.time = request.time;
+            recipe.image = request.image;
+            recipe.userId = request.userId;
+            recipe.userFavorite = request.userFavorite;
+            recipe.categories = new []{1};
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest("Ops... Something went wrong");
+        }
         
         var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe edited"});
@@ -87,8 +95,16 @@ public class RecipeController : ControllerBase
 
         if (recipe == null) return BadRequest("Recipe not found");
         
-        _context.UserRecipes.Remove(recipe);
-
+        try
+        {
+            _context.UserRecipes.Remove(recipe);
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest("Ops... Something went wrong");
+        }
+        
         var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe removed"});
     }

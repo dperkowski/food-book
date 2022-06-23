@@ -7,7 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Fix | CRUD">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/RecipeDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/RecipeDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +22,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -237,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656003756719</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fix | CRUD">
+      <created>1656005613531</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1656005613531</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +609,8 @@
     <MESSAGE value="Fix | Recipe missing Desc" />
     <MESSAGE value="Fix | User response" />
     <MESSAGE value="Add Full CRUD for UserRecipe" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Full CRUD for UserRecipe" />
+    <MESSAGE value="Fix | CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix | CRUD" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
