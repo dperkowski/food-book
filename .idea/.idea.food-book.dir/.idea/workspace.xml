@@ -5,7 +5,17 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fe497b8-15d0-4f99-a1e8-836acfdad825" name="Changes" comment="" />
+    <list default="true" id="9fe497b8-15d0-4f99-a1e8-836acfdad825" name="Changes" comment="Change response of User Controller">
+      <change afterPath="$PROJECT_DIR$/Models/RecipeDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/RecipeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RecipeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DataContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Recipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db-shm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db-wal" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,8 +31,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -32,16 +41,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RiderNuGetOptionsPageId&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "RiderNuGetOptionsPageId",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.food-book: IIS Express">
     <configuration name="food-book: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/food-book.csproj" />
@@ -85,6 +99,9 @@
       <workItem from="1655752048488" duration="5740000" />
       <workItem from="1655820726891" duration="11229000" />
       <workItem from="1655920452508" duration="5742000" />
+      <workItem from="1655929642057" duration="337000" />
+      <workItem from="1655993573441" duration="41000" />
+      <workItem from="1655993644646" duration="3925000" />
     </task>
     <task id="LOCAL-00001" summary="Example user Data">
       <created>1655753103698</created>
@@ -163,7 +180,35 @@
       <option name="project" value="LOCAL" />
       <updated>1655929455655</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary=".">
+      <created>1655929691252</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1655929691252</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Change response of User Controller">
+      <created>1655995888729</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1655995888729</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Change response of User Controller">
+      <created>1655996441918</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1655996441918</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Change response of User Controller">
+      <created>1655996803038</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1655996803038</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +566,9 @@
     <MESSAGE value="Add Entity Framework Core and SQLite DB" />
     <MESSAGE value="Add User Login/Register to DB" />
     <MESSAGE value="Return JWT Token on register" />
-    <option name="LAST_COMMIT_MESSAGE" value="Return JWT Token on register" />
+    <MESSAGE value="." />
+    <MESSAGE value="Change response of User Controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change response of User Controller" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

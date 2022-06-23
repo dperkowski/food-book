@@ -17,6 +17,41 @@ namespace food_book.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
 
+            modelBuilder.Entity("food_book.Recipe", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("desc")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("hardLevel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("image")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("time")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Recipes");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Recipe");
+                });
+
             modelBuilder.Entity("food_book.User", b =>
                 {
                     b.Property<long>("id")
@@ -45,6 +80,19 @@ namespace food_book.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("food_book.UserRecipe", b =>
+                {
+                    b.HasBaseType("food_book.Recipe");
+
+                    b.Property<bool>("userFavorite")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("userId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasDiscriminator().HasValue("UserRecipe");
                 });
 #pragma warning restore 612, 618
         }
