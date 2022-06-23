@@ -1,9 +1,38 @@
 import React, { useEffect, useState } from "react";
 
-// import { useGetRecipesQuery } from "../../features/Recipes";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  loadRecipe,
+  addRecipe,
+  reset,
+} from "../../features/recipes/recipesSlice";
 
 const CookingBook = () => {
-  // const { data, error, isLoading } = useGetRecipesQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { recipes, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.recipes
+  );
+
+  useEffect(() => {
+    dispatch(loadRecipe());
+  }, []);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+      toast.success("Recipes not loaded");
+    }
+    if (isSuccess || recipes) {
+      toast.success("Recipes loaded");
+    }
+    dispatch(reset);
+  }, [recipes, isError, isSuccess, message, navigate, dispatch]);
 
   const defaultDataStructure = {
     id: 0,
@@ -313,6 +342,8 @@ const CookingBook = () => {
 
   return (
     <div className="container mb-4">
+      <button onClick={() => dispatch(loadRecipe())}>LOAD RECIPES</button>
+
       <div className="row">
         <div className="col-md-12">
           <h1 className="display-1 mb-4 text-center">Coking book</h1>

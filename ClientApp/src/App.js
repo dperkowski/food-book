@@ -9,17 +9,15 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./custom.css";
 
 const App = () => {
-  const notify = () => toast("Wow so easy!");
   const displayName = App.name;
   return (
     <>
-      <button onClick={notify}>Notify!</button>
       <ToastContainer />
       <Layout>
         <Routes>
