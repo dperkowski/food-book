@@ -15,3 +15,15 @@ public class UserLoginDto
     
     public string pass { get; set; }= string.Empty;
 }
+
+public class UserResponseDto
+{
+    public long id { get; set; }
+    
+    public string name  { get; set; } = string.Empty;
+
+    public string mail { get; set; }= string.Empty;
+    
+    public string token { get; set; } = string.Empty;
+
+}

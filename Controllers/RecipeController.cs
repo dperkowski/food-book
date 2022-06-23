@@ -23,8 +23,19 @@ public class RecipeController : ControllerBase
         return Ok(await _context.Recipes.ToListAsync());
     }
 
+    [HttpGet("getUserAll")]
+    public async Task<ActionResult<List<UserRecipe>>> GetUserAll(long userId)
+    {
+        return Ok(await UserRecipeConn(userId));
+    }
+
+    private async Task<ActionResult<List<UserRecipe>>> UserRecipeConn(long userId)
+    {
+        return await _context.UserRecipes.Where(recipe => recipe.userId == userId).ToListAsync();
+    }
+
     [HttpPost("add"), Authorize]
-    public async Task<ActionResult<string>> Register(RecipeAddDto request)
+    public async Task<ActionResult<string>> Add(RecipeAddDto request, long userId)
     {
         var recipe = new UserRecipe()
         {
@@ -39,9 +50,50 @@ public class RecipeController : ControllerBase
             categories = new []{1}
         };
 
-        _context.UserRecipes.Add(recipe);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.UserRecipes.Add(recipe);
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest("Ops... Something went wrong");
+        }
 
-        return Ok("Successful");
+        var restUserRecepies = await UserRecipeConn(userId);
+        return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe added"});;
+    }
+
+    [HttpPut("edit"), Authorize]
+    public async Task<ActionResult<object>> Edit(RecipeEditDto request, long userId)
+    {
+        var recipe = await _context.UserRecipes.FindAsync(request.id);
+
+        if (recipe == null) return BadRequest("Recipe not found");
+
+        recipe.name = request.name;
+        recipe.desc = request.desc;
+        recipe.hardLevel = request.hardLevel;
+        recipe.time = request.time;
+        recipe.image = request.image;
+        recipe.userId = request.userId;
+        recipe.userFavorite = request.userFavorite;
+        recipe.categories = new []{1};
+        
+        var restUserRecepies = await UserRecipeConn(userId);
+        return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe edited"});
+    }
+    
+    [HttpDelete("remove"), Authorize]
+    public async Task<ActionResult<UserRecipeResponseDto>> Delete(long id, long userId)
+    {
+        var recipe = await _context.UserRecipes.FindAsync(id);
+
+        if (recipe == null) return BadRequest("Recipe not found");
+        
+        _context.UserRecipes.Remove(recipe);
+
+        var restUserRecepies = await UserRecipeConn(userId);
+        return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe removed"});
     }
 }
