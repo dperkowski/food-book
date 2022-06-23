@@ -44,3 +44,10 @@ public class UserRecipeResponseDto
     
     public string message { get; set; }
 }
+
+public class UserRecipeDeleteDto
+{
+    public long userId { get; set; }
+    
+    public long id { get; set; }
+}

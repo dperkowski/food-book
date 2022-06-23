@@ -23,16 +23,12 @@ public class RecipeController : ControllerBase
         return Ok(await _context.Recipes.ToListAsync());
     }
 
-    [HttpGet("getUserAll")]
+    [HttpGet("getUserAll/{userId}")]
     public async Task<ActionResult<List<UserRecipe>>> GetUserAll(long userId)
-    {
-        return Ok(await UserRecipeConn(userId));
-    }
-
-    private async Task<ActionResult<List<UserRecipe>>> UserRecipeConn(long userId)
     {
         return Ok(await _context.UserRecipes.Where(recipe => recipe.userId == userId).ToListAsync());
     }
+    
 
     [HttpPost("add"), Authorize]
     public async Task<ActionResult<string>> Add(RecipeAddDto request)
@@ -60,7 +56,7 @@ public class RecipeController : ControllerBase
             return BadRequest("Ops... Something went wrong");
         }
 
-        var restUserRecepies = await UserRecipeConn(request.userId);
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe added"});;
     }
 
@@ -71,29 +67,45 @@ public class RecipeController : ControllerBase
 
         if (recipe == null) return BadRequest("Recipe not found");
 
-        recipe.name = request.name;
-        recipe.desc = request.desc;
-        recipe.hardLevel = request.hardLevel;
-        recipe.time = request.time;
-        recipe.image = request.image;
-        recipe.userId = request.userId;
-        recipe.userFavorite = request.userFavorite;
-        recipe.categories = new []{1};
+        try
+        {
+            recipe.name = request.name;
+            recipe.desc = request.desc;
+            recipe.hardLevel = request.hardLevel;
+            recipe.time = request.time;
+            recipe.image = request.image;
+            recipe.userId = request.userId;
+            recipe.userFavorite = request.userFavorite;
+            recipe.categories = new []{1};
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest("Ops... Something went wrong");
+        }
         
-        var restUserRecepies = await UserRecipeConn(request.userId);
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe edited"});
     }
     
     [HttpDelete("remove"), Authorize]
-    public async Task<ActionResult<UserRecipeResponseDto>> Delete(long id, long userId)
+    public async Task<ActionResult<UserRecipeResponseDto>> Delete(UserRecipeDeleteDto request)
     {
-        var recipe = await _context.UserRecipes.FindAsync(id);
+        var recipe = await _context.UserRecipes.FindAsync(request.id);
 
         if (recipe == null) return BadRequest("Recipe not found");
         
-        _context.UserRecipes.Remove(recipe);
-
-        var restUserRecepies = await UserRecipeConn(userId);
+        try
+        {
+            _context.UserRecipes.Remove(recipe);
+            await _context.SaveChangesAsync();
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest("Ops... Something went wrong");
+        }
+        
+        var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe removed"});
     }
 }
