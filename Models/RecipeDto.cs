@@ -4,6 +4,8 @@ public class RecipeAddDto
 {
     public string name { get; set; }
     
+    public string desc { get; set; }
+    
     public int hardLevel { get; set; }
 
     public int time { get; set; }
