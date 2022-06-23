@@ -73,12 +73,12 @@ const CookingBook = () => {
 
   const handleAddRecipeSubmit = (e) => {
     e.preventDefault();
-    const { name, description, hardLevel, time, image, userId, userFavorites } =
+    const { name, desc, hardLevel, time, image, userId, userFavorites } =
       addFormData;
     const token = user.token;
     const recipeData = {
       name,
-      description,
+      desc,
       hardLevel,
       time,
       image,
@@ -341,7 +341,7 @@ const CookingBook = () => {
     </div>
   );
 
-  const recipeListMap = recipeList.map((recipe) => {
+  const recipeListMap = [...recipeList].map((recipe) => {
     if (recipe.id === editingId) {
       return editForm(recipe);
     } else return singleRecipe(recipe);
