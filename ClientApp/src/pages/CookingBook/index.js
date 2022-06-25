@@ -437,17 +437,17 @@ const CookingBook = () => {
     recipe.isVisible ? (
       <div
         key={recipe.id}
-        className="p-4 mb-3 custom-bg text-light rounded-3 border-left"
+        className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg text-light"
       >
         <div className="row g-4">
           <div className="col-lg-4">
             <img
               src={recipe.image}
               alt="recipe"
-              className="img-fluid rounded"
+              className="img-fluid rounded shadow-lg"
             />
           </div>
-          <div className="col-md-9 col-lg-8 offset-md-3 offset-lg-0 d-flex flex-column">
+          <div className="col-lg-8 offset-lg-0 d-flex flex-column">
             <h2>{recipe.name}</h2>
             <p>{recipe.desc}</p>
             <div className="row mt-auto d-flex gap-3 gap-lg-0">
