@@ -19,8 +19,16 @@ const CookingBook = () => {
     (state) => state.recipe
   );
   const { user } = useSelector((state) => state.auth);
+  const [recipeList, setRecipeList] = useState([]);
 
-  const [recipeList, setRecipeList] = useState(recipe);
+  const newRecipeList = recipe.map((recipeElement) => ({
+    ...recipeElement,
+    isVisible: true,
+  }));
+
+  useEffect(() => {
+    setRecipeList(newRecipeList);
+  }, []);
 
   useEffect(() => {
     dispatch(loadRecipe());
@@ -248,10 +256,12 @@ const CookingBook = () => {
       e.preventDefault();
       newRecipeList.map((recipe) => {
         if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
-          // recipe.isVisible = true;
+          console.log("show this");
+          recipe.isVisible = true;
           setRecipeList(newRecipeList);
         } else {
-          // recipe.isVisible = false;
+          console.log("delete that");
+          recipe.isVisible = false;
           setRecipeList(newRecipeList);
         }
       });
@@ -310,36 +320,37 @@ const CookingBook = () => {
     </form>
   );
 
-  const singleRecipe = (recipe) => (
-    <div
-      key={recipe.id}
-      className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
-    >
-      <h2>{recipe.name}</h2>
-      <p>{recipe.desc}</p>
+  const singleRecipe = (recipe) =>
+    recipe.isVisible ? (
+      <div
+        key={recipe.id}
+        className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
+      >
+        <h2>{recipe.name}</h2>
+        <p>{recipe.desc}</p>
 
-      <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button
-          className="btn btn-primary"
-          onClick={() => setFavRecipe(recipe.id)}
-        >
-          Favorite
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => enableEditRecipe(recipe.id)}
-        >
-          Edit
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => deleteRecipe(recipe.id)}
-        >
-          Delete
-        </button>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            className="btn btn-primary"
+            onClick={() => setFavRecipe(recipe.id)}
+          >
+            Favorite
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => enableEditRecipe(recipe.id)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteRecipe(recipe.id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    ) : null;
 
   const recipeListMap = [...recipeList].map((recipe) => {
     if (recipe.id === editingId) {
