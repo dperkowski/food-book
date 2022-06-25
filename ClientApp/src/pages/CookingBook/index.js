@@ -33,7 +33,7 @@ const CookingBook = () => {
 
   useEffect(() => {
     dispatch(loadRecipe());
-  }, []);
+  }, [addRecipe]);
 
   useEffect(() => {
     if (isError) {
@@ -48,13 +48,15 @@ const CookingBook = () => {
 
   //ADD
   const [addFormData, setAddFormData] = useState({
+    id: 0,
     name: "",
     desc: "",
-    hardLevel: "",
-    time: "",
-    image: "",
-    userId: "",
-    userFavorites: "",
+    hardLevel: 1,
+    time: 0,
+    image: "https://picsum.photos/1000/700",
+    userId: 0,
+    userFavorites: false,
+    categories: "",
   });
 
   const handleAddRecipeInputChange = (e, type) => {
@@ -63,8 +65,8 @@ const CookingBook = () => {
       case "name":
         addFormDataCopy.name = e.target.value;
         break;
-      case "description":
-        addFormDataCopy.description = e.target.value;
+      case "desc":
+        addFormDataCopy.desc = e.target.value;
         break;
       case "hardLevel":
         addFormDataCopy.hardLevel = e.target.value;
@@ -80,18 +82,29 @@ const CookingBook = () => {
 
   const handleAddRecipeSubmit = (e) => {
     e.preventDefault();
-    const { name, description, hardLevel, time, image, userId, userFavorites } =
-      addFormData;
-    const token = user.token;
-    const recipeData = {
+    const {
+      id,
       name,
-      description,
+      desc,
       hardLevel,
       time,
       image,
-      userId,
       userFavorites,
+      categories,
+    } = addFormData;
+    const token = user.token;
+    const userId = user.id;
+    const recipeData = {
+      id,
+      name,
+      desc,
+      hardLevel,
+      time,
+      image,
+      userFavorites,
+      categories,
       token,
+      userId,
     };
 
     dispatch(addRecipe(recipeData));
@@ -151,8 +164,8 @@ const CookingBook = () => {
           type="text"
           className="form-control"
           placeholder="Enter title"
-          value={addFormData.description}
-          onChange={(e) => handleAddRecipeInputChange(e, "description")}
+          value={addFormData.desc}
+          onChange={(e) => handleAddRecipeInputChange(e, "desc")}
         ></textarea>
         <button className="btn btn-primary" type="submit">
           Add
