@@ -22,6 +22,7 @@ const CookingBook = () => {
   const [recipeList, setRecipeList] = useState();
 
   useEffect(() => {
+    console.log("object");
     const newRecipeList = recipe
       ? recipe.map((recipeElement) => ({
           ...recipeElement,
@@ -29,7 +30,7 @@ const CookingBook = () => {
         }))
       : null;
     setRecipeList(newRecipeList);
-  }, []);
+  }, [recipe]);
 
   useEffect(() => {
     dispatch(loadRecipe());
@@ -116,7 +117,7 @@ const CookingBook = () => {
     // setNewRecipe(defaultDataStructure);
   };
 
-  const addRecipeForm = (
+  const addRecipeForm = user ? (
     <form onSubmit={handleAddRecipeSubmit}>
       <div className="row">
         <div className="col-md-6 mb-3">
@@ -172,7 +173,7 @@ const CookingBook = () => {
         </button>
       </div>
     </form>
-  );
+  ) : null;
 
   //EDIT
   const [editingId, setEditingId] = useState();
@@ -358,7 +359,7 @@ const CookingBook = () => {
   );
 
   // Recipe list generator
-  const recipeItemButtons = (
+  const recipeItemButtons = user ? (
     <>
       <button
         className="btn btn-primary flex-fill"
@@ -379,7 +380,7 @@ const CookingBook = () => {
         Delete
       </button>
     </>
-  );
+  ) : null;
 
   const recipeItemHardLevel = (hardLevel) => {
     const hardLevelItem = (value, text) => (
