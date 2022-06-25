@@ -420,14 +420,14 @@ const CookingBook = () => {
           role="progressbar"
           style={{
             width: (value / 420) * 100 + "%",
-            minWidth: 10 + "%",
+            minWidth: 50 + "px",
             maxWidth: 100 + "%",
           }}
           aria-valuenow={value}
           aria-valuemin="0"
           aria-valuemax="420"
         >
-          {value}mins
+          {value}min
         </div>
       </div>
     </>
@@ -437,7 +437,7 @@ const CookingBook = () => {
     recipe.isVisible ? (
       <div
         key={recipe.id}
-        className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
+        className="p-4 mb-3 custom-bg text-light rounded-3 border-left"
       >
         <div className="row g-4">
           <div className="col-lg-4">
@@ -447,15 +447,17 @@ const CookingBook = () => {
               className="img-fluid rounded"
             />
           </div>
-          <div className="col-lg-8 d-flex flex-column">
+          <div className="col-md-9 col-lg-8 offset-md-3 offset-lg-0 d-flex flex-column">
             <h2>{recipe.name}</h2>
             <p>{recipe.desc}</p>
-            <div className="row mt-auto d-flex">
-              <div className="col-md-8">
+            <div className="row mt-auto d-flex gap-3 gap-lg-0">
+              <div className="col-lg-6 col-xxl-8">
                 {recipeItemHardLevel(recipe.hardLevel)}
                 {recipeItemTime(recipe.time)}
               </div>
-              <div className="col-md-4 d-flex gap-3">{recipeItemButtons}</div>
+              <div className="col-lg-6 col-xxl-4 d-flex gap-3">
+                {recipeItemButtons}
+              </div>
             </div>
           </div>
         </div>
