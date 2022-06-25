@@ -342,34 +342,70 @@ const CookingBook = () => {
     </form>
   );
 
-  const singleRecipe = (recipe) =>
+  // Recipe list generator
+  const singleRecipeButtons = (
+    <>
+      <button
+        className="btn btn-primary"
+        onClick={() => setFavRecipe(recipe.id)}
+      >
+        Favorite
+      </button>
+      <button
+        className="btn btn-primary"
+        onClick={() => enableEditRecipe(recipe.id)}
+      >
+        Edit
+      </button>
+      <button
+        className="btn btn-danger"
+        onClick={() => deleteRecipe(recipe.id)}
+      >
+        Delete
+      </button>
+    </>
+  );
+
+  const recipeItemHardLevel = (hardLevel) => {
+    switch (hardLevel) {
+      case 1:
+        return <p>Easy to make</p>;
+      case 2:
+        return <p>Takes practice</p>;
+      case 3:
+        return <p>Pretty difficult</p>;
+      case 4:
+        return <p>Not for crybabies</p>;
+      case 5:
+        return <p>Only for chosen ones</p>;
+      default:
+        return <p>No difficulty set</p>;
+    }
+  };
+
+  const recipeItem = (recipe) =>
     recipe.isVisible ? (
       <div
         key={recipe.id}
         className="p-4 mb-3 bg-dark text-light rounded-3 border-left"
       >
-        <h2>{recipe.name}</h2>
-        <p>{recipe.desc}</p>
-
-        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button
-            className="btn btn-primary"
-            onClick={() => setFavRecipe(recipe.id)}
-          >
-            Favorite
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => enableEditRecipe(recipe.id)}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => deleteRecipe(recipe.id)}
-          >
-            Delete
-          </button>
+        <div className="row g-4">
+          <div className="col-lg-4">
+            <img
+              src={recipe.image}
+              alt="recipe"
+              className="img-fluid rounded"
+            />
+          </div>
+          <div className="col-lg-8 d-flex flex-column">
+            <h2>{recipe.name}</h2>
+            <p>{recipe.desc}</p>
+            {recipeItemHardLevel(recipe.hardLevel)}
+            <p>{`Average time - ${recipe.time}mins`}</p>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
+              {singleRecipeButtons}
+            </div>
+          </div>
         </div>
       </div>
     ) : null;
@@ -377,7 +413,7 @@ const CookingBook = () => {
   const recipeListMap = [...recipeList].map((recipe) => {
     if (recipe.id === editingId) {
       return editForm(recipe);
-    } else return singleRecipe(recipe);
+    } else return recipeItem(recipe);
   });
 
   return (
