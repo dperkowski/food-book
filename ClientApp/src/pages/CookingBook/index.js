@@ -19,13 +19,15 @@ const CookingBook = () => {
     (state) => state.recipe
   );
   const { user } = useSelector((state) => state.auth);
-  const [recipeList, setRecipeList] = useState([]);
+  const [recipeList, setRecipeList] = useState();
 
   useEffect(() => {
-    const newRecipeList = recipe.map((recipeElement) => ({
-      ...recipeElement,
-      isVisible: true,
-    }));
+    const newRecipeList = recipe
+      ? recipe.map((recipeElement) => ({
+          ...recipeElement,
+          isVisible: true,
+        }))
+      : null;
     setRecipeList(newRecipeList);
   }, []);
 
@@ -464,11 +466,13 @@ const CookingBook = () => {
       </div>
     ) : null;
 
-  const recipeListMap = [...recipeList].map((recipe) => {
-    if (recipe.id === editingId) {
-      return editForm(recipe);
-    } else return recipeItem(recipe);
-  });
+  const recipeListMap = recipeList
+    ? recipeList.map((recipe) => {
+        if (recipe.id === editingId) {
+          return editForm(recipe);
+        } else return recipeItem(recipe);
+      })
+    : null;
 
   return (
     <div className="container mb-4">
