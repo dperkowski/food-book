@@ -367,21 +367,71 @@ const CookingBook = () => {
   );
 
   const recipeItemHardLevel = (hardLevel) => {
+    const hardLevelItem = (value, text) => (
+      <>
+        <div
+          class="progress mb-3"
+          style={{
+            height: 25 + "px",
+          }}
+        >
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style={{
+              width: value + "%",
+            }}
+            aria-valuenow={value}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            {text}
+          </div>
+        </div>
+      </>
+    );
+
     switch (hardLevel) {
       case 1:
-        return <p>Easy to make</p>;
+        return hardLevelItem(20, "Easy to make");
       case 2:
-        return <p>Takes practice</p>;
+        return hardLevelItem(40, "Takes practice");
       case 3:
-        return <p>Pretty difficult</p>;
+        return hardLevelItem(60, "Pretty difficult");
       case 4:
-        return <p>Not for crybabies</p>;
+        return hardLevelItem(80, "Not for crybabies");
       case 5:
-        return <p>Only for chosen ones</p>;
+        return hardLevelItem(100, "Only for chosen ones");
       default:
-        return <p>No difficulty set</p>;
+        return hardLevelItem(100, "No difficulty set");
     }
   };
+
+  const recipeItemTime = (value) => (
+    <>
+      <div
+        class="progress mb-3"
+        style={{
+          height: 25 + "px",
+        }}
+      >
+        <div
+          class="progress-bar"
+          role="progressbar"
+          style={{
+            width: (value / 420) * 100 + "%",
+            minWidth: 10 + "%",
+            maxWidth: 100 + "%",
+          }}
+          aria-valuenow={value}
+          aria-valuemin="0"
+          aria-valuemax="420"
+        >
+          {value}mins
+        </div>
+      </div>
+    </>
+  );
 
   const recipeItem = (recipe) =>
     recipe.isVisible ? (
@@ -401,7 +451,7 @@ const CookingBook = () => {
             <h2>{recipe.name}</h2>
             <p>{recipe.desc}</p>
             {recipeItemHardLevel(recipe.hardLevel)}
-            <p>{`Average time - ${recipe.time}mins`}</p>
+            {recipeItemTime(recipe.time)}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
               {singleRecipeButtons}
             </div>
