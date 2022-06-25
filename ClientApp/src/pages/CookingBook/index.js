@@ -343,22 +343,22 @@ const CookingBook = () => {
   );
 
   // Recipe list generator
-  const singleRecipeButtons = (
+  const recipeItemButtons = (
     <>
       <button
-        className="btn btn-primary"
+        className="btn btn-primary flex-fill"
         onClick={() => setFavRecipe(recipe.id)}
       >
         Favorite
       </button>
       <button
-        className="btn btn-primary"
+        className="btn btn-primary flex-fill"
         onClick={() => enableEditRecipe(recipe.id)}
       >
         Edit
       </button>
       <button
-        className="btn btn-danger"
+        className="btn btn-danger flex-fill"
         onClick={() => deleteRecipe(recipe.id)}
       >
         Delete
@@ -410,7 +410,7 @@ const CookingBook = () => {
   const recipeItemTime = (value) => (
     <>
       <div
-        class="progress mb-3"
+        class="progress"
         style={{
           height: 25 + "px",
         }}
@@ -450,10 +450,12 @@ const CookingBook = () => {
           <div className="col-lg-8 d-flex flex-column">
             <h2>{recipe.name}</h2>
             <p>{recipe.desc}</p>
-            {recipeItemHardLevel(recipe.hardLevel)}
-            {recipeItemTime(recipe.time)}
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-              {singleRecipeButtons}
+            <div className="row mt-auto d-flex">
+              <div className="col-md-8">
+                {recipeItemHardLevel(recipe.hardLevel)}
+                {recipeItemTime(recipe.time)}
+              </div>
+              <div className="col-md-4 d-flex gap-3">{recipeItemButtons}</div>
             </div>
           </div>
         </div>
