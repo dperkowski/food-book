@@ -21,12 +21,11 @@ const CookingBook = () => {
   const { user } = useSelector((state) => state.auth);
   const [recipeList, setRecipeList] = useState([]);
 
-  const newRecipeList = recipe.map((recipeElement) => ({
-    ...recipeElement,
-    isVisible: true,
-  }));
-
   useEffect(() => {
+    const newRecipeList = recipe.map((recipeElement) => ({
+      ...recipeElement,
+      isVisible: true,
+    }));
     setRecipeList(newRecipeList);
   }, []);
 
@@ -58,7 +57,6 @@ const CookingBook = () => {
 
   const handleAddRecipeInputChange = (e, type) => {
     const addFormDataCopy = { ...addFormData };
-    console.log(e.target.value);
     switch (type) {
       case "name":
         addFormDataCopy.name = e.target.value;
@@ -72,7 +70,6 @@ const CookingBook = () => {
       case "time":
         addFormDataCopy.time = e.target.value;
         break;
-
       default:
         break;
     }
@@ -106,16 +103,44 @@ const CookingBook = () => {
 
   const addRecipeForm = (
     <form onSubmit={handleAddRecipeSubmit}>
-      <div className="input-group mb-3">
-        <span className="input-group-text">Title</span>
-        <input
-          type="text"
-          className="form-control"
-          aria-describedby="recipeTitle"
-          placeholder="Enter title"
-          value={addFormData.name}
-          onChange={(e) => handleAddRecipeInputChange(e, "name")}
-        ></input>
+      <div className="row">
+        <div className="col-md-6 mb-3">
+          <div className="input-group">
+            <span className="input-group-text">Title</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-describedby="recipeTitle"
+              placeholder="Enter title"
+              value={addFormData.name}
+              onChange={(e) => handleAddRecipeInputChange(e, "name")}
+            ></input>
+          </div>
+        </div>
+
+        <div className="col-md-3 mb-3">
+          <select
+            className="form-select"
+            value={addFormData.hardLevel}
+            onChange={(e) => handleAddRecipeInputChange(e, "hardLevel")}
+          >
+            <option value="1">Easy to make</option>
+            <option value="2">Takes practice</option>
+            <option value="3">Only for chosen ones</option>
+          </select>
+        </div>
+
+        <div className="col-md-3 mb-3">
+          <select
+            className="form-select"
+            value={addFormData.time}
+            onChange={(e) => handleAddRecipeInputChange(e, "time")}
+          >
+            <option value="1">Up to 30min</option>
+            <option value="2">30 - 60min</option>
+            <option value="3">60min+</option>
+          </select>
+        </div>
       </div>
 
       <div className="input-group mb-3">
@@ -123,7 +148,6 @@ const CookingBook = () => {
         <textarea
           type="text"
           className="form-control"
-          aria-describedby="recipeTitle"
           placeholder="Enter title"
           value={addFormData.description}
           onChange={(e) => handleAddRecipeInputChange(e, "description")}
@@ -256,11 +280,9 @@ const CookingBook = () => {
       e.preventDefault();
       newRecipeList.map((recipe) => {
         if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
-          console.log("show this");
           recipe.isVisible = true;
           setRecipeList(newRecipeList);
         } else {
-          console.log("delete that");
           recipe.isVisible = false;
           setRecipeList(newRecipeList);
         }
