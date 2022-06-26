@@ -2,7 +2,7 @@ import React from "react";
 
 import Recipe from "./Recipe.jsx";
 
-const SearchResult = (recipeList, user) => {
+const SearchResult = ({ recipeList, user }) => {
   const editingId = 0; //todo
   recipeList = recipeList.recipeList;
 

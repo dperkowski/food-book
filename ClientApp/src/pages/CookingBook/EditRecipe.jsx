@@ -13,7 +13,7 @@ import {
 
 import Recipe from "./Recipe.jsx";
 
-const EditRecipe = (recipeList, user) => {
+const EditRecipe = ({ recipeList, user }) => {
   //EDIT
   const [editingId, setEditingId] = useState();
   const [editFormData, setEditFormData] = useState({

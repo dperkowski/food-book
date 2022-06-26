@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Recipes from "./Recipes";
 
-const SearchBar = (recipesData) => {
+const SearchBar = ({ recipesData }) => {
   const { user } = useSelector((state) => state.auth);
   const [recipeList, setRecipeList] = useState([]);
 
@@ -14,7 +14,7 @@ const SearchBar = (recipesData) => {
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();
-    const newRecipeList = [...recipesData.recipesData];
+    const newRecipeList = [...recipesData];
 
     if (type === "search") {
       e.preventDefault();
@@ -26,33 +26,11 @@ const SearchBar = (recipesData) => {
           recipe.isVisible = false;
           setRecipeList(newRecipeList);
         }
-        console.log(recipeList);
       });
     } else if (type === "favorites") {
       setShowFavorites((prev) => !prev);
     }
   };
-
-  // useEffect(() => {
-  //   const newRecipeList = [...recipeList];
-  //   if (showFavorites) {
-  //     newRecipeList.map((recipe) => {
-  //       if (recipe.isFav) {
-  //         recipe.isVisible = true;
-  //         setRecipeList(newRecipeList);
-  //       } else {
-  //         recipe.isVisible = false;
-  //         setRecipeList(newRecipeList);
-  //       }
-  //     });
-  //   } else if (!showFavorites) {
-  //     newRecipeList.map((recipe) => {
-  //       recipe.isVisible = true;
-  //       setRecipeList(newRecipeList);
-  //     });
-  //   }
-  //   console.log(showFavorites);
-  // }, [showFavorites]);
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
@@ -82,9 +60,11 @@ const SearchBar = (recipesData) => {
           </button>
         </div>
       </form>
-      {recipesData.recipesData ? (
-        <Recipes recipeList={recipesData.recipesData} user={user} />
-      ) : null}
+      <Recipes
+        recipeList={recipesData}
+        user={user}
+        showFavorites={showFavorites}
+      />
     </>
   );
 };

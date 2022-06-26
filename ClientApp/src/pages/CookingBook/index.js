@@ -25,8 +25,6 @@ const CookingBook = () => {
   const { user } = useSelector((state) => state.auth);
   const [recipeList, setRecipeList] = useState();
 
-  console.log(recipe);
-
   // Load recipes
   useEffect(() => {
     const newRecipeList = recipe
@@ -69,7 +67,7 @@ const CookingBook = () => {
 
       <div className="row">
         <div className="col-md-12">
-          <Recipes recipeList={recipe} user={user} />
+          {/* <Recipes recipeList={recipeList} user={user} /> */}
         </div>
       </div>
 

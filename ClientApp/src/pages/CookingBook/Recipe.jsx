@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Recipe = (recipeData) => {
+const Recipe = ({ recipeData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -121,21 +121,21 @@ const Recipe = (recipeData) => {
 
   return (
     <div
-      key={recipeData.recipeData.id}
+      key={recipeData.id}
       className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg text-light"
     >
       <div className="row g-4">
         <div className="col-lg-4">
           <img
-            src={recipeData.recipeData.image}
+            src={recipeData.image}
             alt="recipe"
             className="img-fluid rounded shadow-lg"
           />
         </div>
         <div className="col-lg-8 offset-lg-0 d-flex flex-column">
-          <h2>{recipeData.recipeData.name}</h2>
-          <p>{recipeData.recipeData.desc}</p>
-          {progressBarsAndButtons(recipeData.recipeData)}
+          <h2>{recipeData.name}</h2>
+          <p>{recipeData.desc}</p>
+          {progressBarsAndButtons(recipeData)}
         </div>
       </div>
     </div>
