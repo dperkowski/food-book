@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-import {
-  loadRecipe,
-  addRecipe,
-  reset,
-} from "../../features/recipes/recipeSlice";
+import { addRecipe } from "../../features/recipes/recipeSlice";
 
 const AddRecipe = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.recipe
-  );
   const { user } = useSelector((state) => state.auth);
-  const [recipeList, setRecipeList] = useState();
 
   //ADD
   const [addFormData, setAddFormData] = useState({
@@ -27,7 +15,7 @@ const AddRecipe = () => {
     name: "",
     desc: "",
     hardLevel: 1,
-    time: null,
+    time: undefined,
     image: "https://picsum.photos/1000/700",
     userId: 0,
     userFavorites: false,
@@ -81,7 +69,6 @@ const AddRecipe = () => {
       token,
       userId,
     };
-
     dispatch(addRecipe(recipeData));
   };
 

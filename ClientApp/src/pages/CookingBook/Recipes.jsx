@@ -2,15 +2,13 @@ import React from "react";
 
 import Recipe from "./Recipe.jsx";
 
-const Recipes = (recipeList, user) => {
+const Recipes = ({ recipeList, user }) => {
   const editingId = 0; //todo
-  recipeList = recipeList.recipeList;
   const recipeListMap = recipeList
     ? recipeList.map((recipeData) => {
         if (recipeData.id === editingId) {
           // return editForm(recipeData);
-        } else if (recipeData.isVisible === true)
-          return <Recipe recipeData={recipeData} />;
+        } else return <Recipe key={recipeData.id} recipeData={recipeData} />;
       })
     : null;
 

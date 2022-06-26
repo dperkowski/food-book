@@ -5,13 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import {
-  loadRecipe,
-  addRecipe,
-  reset,
-} from "../../features/recipes/recipeSlice";
+import { loadRecipe, reset } from "../../features/recipes/recipeSlice";
 
-import Recipes from "./Recipes.jsx";
 import Search from "./Search.jsx";
 import AddRecipe from "./AddRecipe.jsx";
 
@@ -19,10 +14,9 @@ const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
+  const { recipe, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
-  const { user } = useSelector((state) => state.auth);
   const [recipeList, setRecipeList] = useState();
 
   // Load recipes
@@ -39,7 +33,7 @@ const CookingBook = () => {
 
   useEffect(() => {
     dispatch(loadRecipe());
-  }, [addRecipe]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -62,15 +56,15 @@ const CookingBook = () => {
 
       <div className="row">
         <div className="col-md-12">
-          <Search recipesData={recipeList} />
+          <Search />
         </div>
       </div>
 
-      <div className="row">
+      {/* <div className="row">
         <div className="col-md-12">
-          {/* <Recipes recipeList={recipeList} user={user} /> */}
+          <Recipes recipeList={recipeList} user={user} />
         </div>
-      </div>
+      </div> */}
 
       <div className="row">
         <div className="col-md-12">

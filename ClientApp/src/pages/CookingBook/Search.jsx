@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from "react";
-
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Recipes from "./Recipes";
 
-const SearchBar = ({ recipesData }) => {
+const Search = ({ recipesData }) => {
   const { user } = useSelector((state) => state.auth);
-  const [recipeList, setRecipeList] = useState([]);
+  const { recipe, isError, isSuccess, message } = useSelector(
+    (state) => state.recipe
+  );
 
-  const [showFavorites, setShowFavorites] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [filteredList, setFilteredList] = useState(recipe);
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();
-    const newRecipeList = [...recipesData];
+    // const newRecipeList = [...recipesData];
 
     if (type === "search") {
       e.preventDefault();
-      newRecipeList.map((recipe) => {
+      setFilteredList([]);
+      recipe.map((recipe) => {
         if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
-          recipe.isVisible = true;
-          setRecipeList(newRecipeList);
-        } else {
-          recipe.isVisible = false;
-          setRecipeList(newRecipeList);
+          setFilteredList((prev) => [...prev, recipe]);
         }
       });
-    } else if (type === "favorites") {
-      setShowFavorites((prev) => !prev);
     }
   };
 
@@ -64,9 +59,9 @@ const SearchBar = ({ recipesData }) => {
           </button>
         </div>
       </form>
-      <Recipes recipeList={recipesData} user={user} />
+      <Recipes recipeList={filteredList} user={user} />
     </>
   );
 };
 
-export default SearchBar;
+export default Search;

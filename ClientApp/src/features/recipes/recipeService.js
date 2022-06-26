@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 const API_URL = "/api/recipe/";
 
@@ -26,7 +27,6 @@ const addRecipe = async (recipeData) => {
     categories,
   };
 
-  console.log(filteredRecipeData);
   const response = {};
   try {
     response = await axios.post(API_URL + "add", filteredRecipeData, {

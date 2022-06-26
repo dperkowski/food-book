@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Recipe = ({ recipeData }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.recipe
-  );
-
   const { user } = useSelector((state) => state.auth);
-  const [recipeList, setRecipeList] = useState();
 
   // Recipe list generator
   //   const recipeItemButtons = (recipe) => (
@@ -42,13 +33,13 @@ const Recipe = ({ recipeData }) => {
     const hardLevelItem = (value, text) => (
       <>
         <div
-          class="progress mb-3"
+          className="progress mb-3"
           style={{
             height: 25 + "px",
           }}
         >
           <div
-            class="progress-bar"
+            className="progress-bar"
             role="progressbar"
             style={{
               width: value + "%",
@@ -82,13 +73,13 @@ const Recipe = ({ recipeData }) => {
   const recipeItemTime = (value) => (
     <>
       <div
-        class="progress"
+        className="progress"
         style={{
           height: 25 + "px",
         }}
       >
         <div
-          class="progress-bar"
+          className="progress-bar"
           role="progressbar"
           style={{
             width: (value / 420) * 100 + "%",
@@ -121,7 +112,7 @@ const Recipe = ({ recipeData }) => {
 
   const title = recipeData.isFavorite ? (
     <h2>
-      {recipeData.name} <span class="badge bg-primary">Favorite</span>
+      {recipeData.name} <span className="badge bg-primary">Favorite</span>
     </h2>
   ) : (
     <h2>{recipeData.name}</h2>
