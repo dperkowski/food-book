@@ -55,16 +55,16 @@ const SearchBar = ({ recipesData }) => {
           >
             Favorites
           </button>
-          <button className="btn btn-outline-primary" type="button">
+          <button
+            className="btn btn-outline-primary"
+            type="button"
+            onClick={(e) => handleSearchClick(e, "search")}
+          >
             Search
           </button>
         </div>
       </form>
-      <Recipes
-        recipeList={recipesData}
-        user={user}
-        showFavorites={showFavorites}
-      />
+      <Recipes recipeList={recipesData} user={user} />
     </>
   );
 };

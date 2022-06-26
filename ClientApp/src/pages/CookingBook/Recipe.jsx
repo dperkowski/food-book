@@ -119,6 +119,14 @@ const Recipe = ({ recipeData }) => {
     </div>
   );
 
+  const title = recipeData.isFavorite ? (
+    <h2>
+      {recipeData.name} <span class="badge bg-primary">Favorite</span>
+    </h2>
+  ) : (
+    <h2>{recipeData.name}</h2>
+  );
+
   return (
     <div
       key={recipeData.id}
@@ -133,7 +141,7 @@ const Recipe = ({ recipeData }) => {
           />
         </div>
         <div className="col-lg-8 offset-lg-0 d-flex flex-column">
-          <h2>{recipeData.name}</h2>
+          {title}
           <p>{recipeData.desc}</p>
           {progressBarsAndButtons(recipeData)}
         </div>

@@ -2,9 +2,9 @@ import React from "react";
 
 import Recipe from "./Recipe.jsx";
 
-const Recipes = ({ recipeList, user, showFavorites }) => {
+const Recipes = (recipeList, user) => {
   const editingId = 0; //todo
-  console.log(showFavorites);
+  recipeList = recipeList.recipeList;
   const recipeListMap = recipeList
     ? recipeList.map((recipeData) => {
         if (recipeData.id === editingId) {

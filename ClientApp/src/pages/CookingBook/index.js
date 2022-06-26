@@ -31,6 +31,7 @@ const CookingBook = () => {
       ? recipe.map((recipeElement) => ({
           ...recipeElement,
           isVisible: true,
+          isFavorite: false,
         }))
       : null;
     setRecipeList(newRecipeList);
