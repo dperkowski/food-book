@@ -50,7 +50,7 @@ export const loadRecipe = createAsyncThunk(
 
 // Delete recipe
 export const deleterecipe = createAsyncThunk("recipe/deleterecipe", async () =>
-  recipeService.deleterecipe()
+  recipeService.deleteRecipe()
 );
 
 export const recipeSlice = createSlice({

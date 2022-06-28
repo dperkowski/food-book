@@ -12,6 +12,8 @@ const UserProfile = () => {
     (state) => state.auth
   );
 
+  console.log(user);
+
   return (
     <div className="container mt-auto">
       <div className="row">
