@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Recipes from "./Recipes";
 
-const Search = ({ recipesData }) => {
+const Search = () => {
   const { user } = useSelector((state) => state.auth);
   const { recipe, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
@@ -14,12 +14,10 @@ const Search = ({ recipesData }) => {
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();
-    // const newRecipeList = [...recipesData];
-
     if (type === "search") {
       e.preventDefault();
       setFilteredList([]);
-      recipe.map((recipe) => {
+      recipe.forEach((recipe) => {
         if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
           setFilteredList((prev) => [...prev, recipe]);
         }

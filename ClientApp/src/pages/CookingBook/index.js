@@ -60,12 +60,6 @@ const CookingBook = () => {
         </div>
       </div>
 
-      {/* <div className="row">
-        <div className="col-md-12">
-          <Recipes recipeList={recipeList} user={user} />
-        </div>
-      </div> */}
-
       <div className="row">
         <div className="col-md-12">
           <AddRecipe />
