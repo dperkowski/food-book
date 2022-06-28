@@ -15,6 +15,7 @@ const addRecipe = async (recipeData) => {
     userId,
     userFavorites,
     categories,
+    token,
   } = recipeData;
   const filteredRecipeData = {
     name,
@@ -31,7 +32,7 @@ const addRecipe = async (recipeData) => {
   try {
     response = await axios.post(API_URL + "add", filteredRecipeData, {
       headers: {
-        Authorization: "Bearer " + recipeData.token,
+        Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
     });
@@ -57,8 +58,30 @@ const loadRecipe = async () => {
 };
 
 // Delete recipe
-const deleteRecipe = () => {
-  localStorage.removeItem("recipe");
+const deleteRecipe = async (recipeData) => {
+  const { userId, id, token } = recipeData;
+  const filteredRecipeData = {
+    userId,
+    id,
+  };
+
+  const response = {};
+  try {
+    response = await axios.post(API_URL + "remove", filteredRecipeData, {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (response.data) {
+    localStorage.removeItem("recipe", JSON.stringify(response.data));
+  }
+
+  return response.data;
 };
 
 const recipe = {

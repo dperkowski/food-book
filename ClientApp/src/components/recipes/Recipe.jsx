@@ -1,33 +1,37 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { deleteRecipe } from "../../features/recipes/recipeSlice";
 
 const Recipe = ({ recipeData }) => {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const token = user.token;
 
-  // Recipe list generator
-  //   const recipeItemButtons = (recipe) => (
-  //     <>
-  //       <button
-  //         className="btn btn-primary flex-fill"
-  //         onClick={() => setFavRecipe(recipe.id)}
-  //       >
-  //         Favorite
-  //       </button>
-  //       <button
-  //         className="btn btn-primary flex-fill"
-  //         onClick={() => enableEditRecipe(recipe.id)}
-  //       >
-  //         Edit
-  //       </button>
-  //       <button
-  //         className="btn btn-danger flex-fill"
-  //         onClick={() => deleteRecipe(recipe.id)}
-  //       >
-  //         Delete
-  //       </button>
-  //     </>
-  //   );
+  //  Recipe list generator
+  const recipeItemButtons = (recipe) => (
+    <>
+      <button
+        className="btn btn-primary flex-fill"
+        // onClick={() => setFavRecipe(recipe.id)}
+      >
+        Favorite
+      </button>
+      <button
+        className="btn btn-primary flex-fill"
+        // onClick={() => enableEditRecipe(recipe.id)}
+      >
+        Edit
+      </button>
+      <button
+        className="btn btn-danger flex-fill"
+        onClick={() => dispatch(deleteRecipe({ userId: 1, id: 1, token }))}
+      >
+        Delete
+      </button>
+    </>
+  );
 
   const recipeItemHardLevel = (hardLevel) => {
     const hardLevelItem = (value, text) => (
@@ -104,7 +108,7 @@ const Recipe = ({ recipeData }) => {
       </div>
       {user ? (
         <div className="col-lg-6 col-xxl-4 d-flex gap-3">
-          {/* {recipeItemButtons(recipe)} */}
+          {recipeItemButtons(recipe)}
         </div>
       ) : null}
     </div>

@@ -57,7 +57,7 @@ const Search = () => {
           </button>
         </div>
       </form>
-      <Recipes recipeList={filteredList} user={user} />
+      <Recipes recipeList={filteredList} user={user} keyString="search" />
     </>
   );
 };

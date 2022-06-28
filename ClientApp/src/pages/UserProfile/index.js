@@ -7,12 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { login, reset } from "../../features/auth/authSlice";
 
+import UserRecipes from "./UserRecipes.jsx";
+import AddRecipe from "../../components/recipes/AddRecipe.jsx";
+
 const UserProfile = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
-  console.log(user);
 
   return (
     <div className="container mt-auto">
@@ -22,6 +23,18 @@ const UserProfile = () => {
 
       <div className="row">
         <h2 className="display-2 mb-4 text-center">Hello, {user.name}</h2>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">
+          <AddRecipe />
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">
+          <UserRecipes />
+        </div>
       </div>
     </div>
   );

@@ -7,8 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { loadRecipe, reset } from "../../features/recipes/recipeSlice";
 
-import Search from "./Search.jsx";
-import AddRecipe from "./AddRecipe.jsx";
+import Search from "../../components/recipes/Search.jsx";
 
 const CookingBook = () => {
   const navigate = useNavigate();
@@ -57,12 +56,6 @@ const CookingBook = () => {
       <div className="row">
         <div className="col-md-12">
           <Search />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-md-12">
-          <AddRecipe />
         </div>
       </div>
     </div>

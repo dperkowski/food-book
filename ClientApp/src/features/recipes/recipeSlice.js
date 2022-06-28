@@ -49,8 +49,9 @@ export const loadRecipe = createAsyncThunk(
 );
 
 // Delete recipe
-export const deleterecipe = createAsyncThunk("recipe/deleterecipe", async () =>
-  recipeService.deleteRecipe()
+export const deleteRecipe = createAsyncThunk(
+  "recipe/deleterecipe",
+  async (recipeData) => recipeService.deleteRecipe(recipeData)
 );
 
 export const recipeSlice = createSlice({
@@ -94,7 +95,7 @@ export const recipeSlice = createSlice({
         state.message = action.payload;
         state.recipe = null;
       })
-      .addCase(deleterecipe.fulfilled, (state) => {
+      .addCase(deleteRecipe.fulfilled, (state) => {
         state.recipe = null;
       });
   },
