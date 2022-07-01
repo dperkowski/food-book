@@ -12,10 +12,19 @@ const UserRecipes = () => {
   const [filteredList, setFilteredList] = useState(recipe);
 
   useEffect(() => {
-    recipe.forEach((recipe) => {
-      if (recipe) setFilteredList((prev) => [...prev, recipe]);
-    });
+    handleArray();
   }, []);
+
+  const handleArray = () => {
+    const newFilteredList = [...recipe];
+    const newArray = [];
+    newFilteredList.map((recipe) => {
+      if (recipe.id === user.id) {
+        return newArray.push(recipe);
+      } else return null;
+    });
+    setFilteredList(newArray);
+  };
 
   return (
     <>

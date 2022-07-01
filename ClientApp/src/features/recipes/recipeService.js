@@ -64,10 +64,11 @@ const deleteRecipe = async (recipeData) => {
     userId,
     id,
   };
+  console.log(recipeData);
 
   const response = {};
   try {
-    response = await axios.post(API_URL + "remove", filteredRecipeData, {
+    response = await axios.delete(API_URL + "remove", filteredRecipeData, {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",

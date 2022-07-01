@@ -8,7 +8,7 @@ export class Layout extends Component {
 
   render() {
     return (
-      <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column min-vh-100 overflow-hidden">
         <NavMenu />
         {this.props.children}
         <Footer />

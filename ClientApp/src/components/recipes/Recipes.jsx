@@ -8,10 +8,7 @@ const Recipes = ({ recipeList, user, keyString }) => {
     ? recipeList.map((recipeData) => {
         if (recipeData.id === editingId) {
           // return editForm(recipeData);
-        } else
-          return (
-            <Recipe key={keyString + recipeData.id} recipeData={recipeData} />
-          );
+        } else return <Recipe key={recipeData.id} recipeData={recipeData} />;
       })
     : null;
 
