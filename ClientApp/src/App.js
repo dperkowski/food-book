@@ -5,6 +5,7 @@ import CookingBook from "./pages/CookingBook";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserProfile from "./pages/UserProfile";
+import { useSelector, useDispatch } from "react-redux";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,15 +13,21 @@ import "react-toastify/dist/ReactToastify.css";
 import "./assets/scss/main.scss";
 
 const App = () => {
+  const { user } = useSelector((state) => state.auth);
+  const { recipe, userRecipe, isError, isSuccess, message } = useSelector(
+    (state) => state.recipe
+  );
   return (
     <>
       <ToastContainer />
       <Layout>
         <Routes>
-          <Route exact path="/" element={<CookingBook />} />
+          <Route exact path="/" element={recipe ? <CookingBook /> : null} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/user-profile" element={<UserProfile />} />
+          {user ? (
+            <Route path="/user-profile" element={<UserProfile />} />
+          ) : null}
         </Routes>
       </Layout>
     </>

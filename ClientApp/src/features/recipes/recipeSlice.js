@@ -3,9 +3,11 @@ import recipeService from "./recipeService";
 
 // Get recipe from localStorage
 const recipe = JSON.parse(localStorage.getItem("recipe"));
+const userRecipe = JSON.parse(localStorage.getItem("userRecipe"));
 
 const initialState = {
   recipe: recipe ? recipe : null,
+  userRecipe: userRecipe ? userRecipe : null,
   isError: false,
   isSuccess: false,
   osLoading: false,
@@ -36,6 +38,24 @@ export const loadRecipe = createAsyncThunk(
   async (recipe, thunkAPI) => {
     try {
       return await recipeService.loadRecipe(recipe);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Load user recipes
+export const loadUserRecipe = createAsyncThunk(
+  "recipe/loaduserrecipe",
+  async (userRecipe, thunkAPI) => {
+    try {
+      return await recipeService.loadUserRecipe(userRecipe);
     } catch (error) {
       const message =
         (error.response &&
@@ -94,6 +114,20 @@ export const recipeSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.recipe = null;
+      })
+      .addCase(loadUserRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loadUserRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessS = false;
+        state.userRecipe = action.payload;
+      })
+      .addCase(loadUserRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.userRecipe = null;
       })
       .addCase(deleteRecipe.fulfilled, (state) => {
         state.recipe = null;

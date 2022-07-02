@@ -7,7 +7,7 @@ import { deleteRecipe } from "../../features/recipes/recipeSlice";
 const Recipe = ({ recipeData }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const token = user.token;
+  const token = user?.token;
 
   //  Recipe list generator
   const recipeItemButtons = (recipe) => (

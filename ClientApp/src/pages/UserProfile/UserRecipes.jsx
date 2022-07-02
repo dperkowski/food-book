@@ -1,35 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Recipes from "../../components/recipes/Recipes.jsx";
 
+import { loadUserRecipe, reset } from "../../features/recipes/recipeSlice";
+
 const UserRecipes = () => {
+  const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
-  const { recipe, isError, isSuccess, message } = useSelector(
+  const { recipe, userRecipe, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
 
-  const [filteredList, setFilteredList] = useState(recipe);
-
   useEffect(() => {
-    handleArray();
+    dispatch(loadUserRecipe(user.id));
   }, []);
 
-  const handleArray = () => {
-    const newFilteredList = [...recipe];
-    const newArray = [];
-    newFilteredList.map((recipe) => {
-      if (recipe.id === user.id) {
-        return newArray.push(recipe);
-      } else return null;
-    });
-    setFilteredList(newArray);
-  };
+  console.log(userRecipe);
+  console.log(user.id);
+
+  // const [filteredList, setFilteredList] = useState(recipe);
+
+  // useEffect(() => {
+  //   handleArray();
+  // }, []);
+
+  // const handleArray = () => {
+  //   const newFilteredList = [...recipe];
+  //   const newArray = [];
+  //   newFilteredList.map((recipe) => {
+  //     if (recipe.id === user.id) {
+  //       return newArray.push(recipe);
+  //     } else return null;
+  //   });
+  //   setFilteredList(newArray);
+  // };
 
   return (
-    <>
-      <Recipes recipeList={filteredList} user={user} keyString="userrecipes" />
-    </>
+    <Recipes recipeList={userRecipe} user={user} keyString="userrecipes" />
   );
 };
 

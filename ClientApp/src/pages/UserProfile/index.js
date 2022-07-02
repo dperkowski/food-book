@@ -22,7 +22,7 @@ const UserProfile = () => {
       </div>
 
       <div className="row">
-        <h2 className="display-2 mb-5 text-center">Hello, {user.name}</h2>
+        <h2 className="display-2 mb-5 text-center">Hello, {user?.name}</h2>
       </div>
 
       <div className="row">
