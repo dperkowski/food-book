@@ -43,9 +43,9 @@ const NavMenu = () => {
   );
 
   return (
-    <header>
+    <header className="sticky-top">
       <Navbar
-        className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+        className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 bg-light bg-opacity-75"
         light
       >
         <Container>
