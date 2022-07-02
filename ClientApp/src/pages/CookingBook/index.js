@@ -49,7 +49,7 @@ const CookingBook = () => {
     <div className="container mb-4">
       <div className="row">
         <div className="col-md-12">
-          <h1 className="display-1 mb-4 text-center">Coking book</h1>
+          <h1 className="display-1 mb-5 text-center">Coking book</h1>
         </div>
       </div>
 

@@ -9,7 +9,7 @@ import UserProfile from "./pages/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./custom.css";
+import "./assets/scss/main.scss";
 
 const App = () => {
   return (

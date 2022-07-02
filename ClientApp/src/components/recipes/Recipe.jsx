@@ -125,19 +125,23 @@ const Recipe = ({ recipeData }) => {
   return (
     <div
       key={recipeData.id}
-      className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg text-light"
+      className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg-container overflow-hidden"
     >
       <div className="row g-4">
         <div className="col-lg-4">
           <img
             src={recipeData.image}
             alt="recipe"
-            className="img-fluid rounded shadow-lg"
+            className="img-fluid rounded shadow"
           />
         </div>
+
         <div className="col-lg-8 offset-lg-0 d-flex flex-column">
-          {title}
-          <p>{recipeData.desc}</p>
+          <div className="custom-bg">
+            {title}
+            <p className="mb-5">{recipeData.desc}</p>
+          </div>
+
           {progressBarsAndButtons(recipeData)}
         </div>
       </div>
