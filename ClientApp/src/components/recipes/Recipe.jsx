@@ -106,7 +106,7 @@ const Recipe = ({ recipeData }) => {
         {recipeItemHardLevel(recipe.hardLevel)}
         {recipeItemTime(recipe.time)}
       </div>
-      {user ? (
+      {user.id === recipeData.id ? (
         <div className="col-lg-6 col-xxl-4 d-flex gap-3">
           {recipeItemButtons(recipe)}
         </div>
