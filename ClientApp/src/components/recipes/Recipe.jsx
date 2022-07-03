@@ -8,6 +8,8 @@ import {
   loadUserRecipe,
 } from "../../features/recipes/recipeSlice";
 
+import { EditRecipe } from "./EditRecipe";
+
 const Recipe = ({ recipeData, showButtons }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -36,7 +38,7 @@ const Recipe = ({ recipeData, showButtons }) => {
         </button>
         <button
           className="btn btn-primary flex-fill"
-          // onClick={() => enableEditRecipe(recipe.id)}
+          onClick={() => EditRecipe(recipeData)}
         >
           Edit
         </button>

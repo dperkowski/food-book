@@ -13,7 +13,9 @@ import {
 
 import Recipe from "./Recipe.jsx";
 
-const EditRecipe = ({ recipeList, user }) => {
+export const EditRecipe = ({ recipeData }) => {
+  console.log(recipeData);
+
   //EDIT
   const [editingId, setEditingId] = useState();
   const [editFormData, setEditFormData] = useState({
@@ -27,13 +29,6 @@ const EditRecipe = ({ recipeList, user }) => {
   });
 
   const enableEditRecipe = (id) => {
-    const newRecipeList = [...recipeList];
-
-    newRecipeList.map((recipe) => {
-      if (recipe.id === id) {
-        setEditFormData(recipe);
-      }
-    });
     setEditingId(id);
   };
 
@@ -108,105 +103,5 @@ const EditRecipe = ({ recipeList, user }) => {
     </div>
   );
 
-  // DELETE
-  const deleteRecipe = (id) => {
-    const newRecipeList = recipeList.filter((recipe) => recipe.id !== id);
-    setRecipeList(newRecipeList);
-  };
-
-  //FAVORITE
-  const setFavRecipe = (id) => {
-    const newRecipeList = [...recipeList];
-    newRecipeList.map((recipe) => {
-      if (recipe.id === id) {
-        // recipe.isFav = !recipe.isFav;
-        setRecipeList(newRecipeList);
-      }
-    });
-  };
-
-  //SEARCH
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleSearchClick = (e, type) => {
-    const newRecipeList = [...recipeList];
-
-    if (type === "search") {
-      e.preventDefault();
-      newRecipeList.map((recipe) => {
-        if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
-          recipe.isVisible = true;
-          setRecipeList(newRecipeList);
-        } else {
-          recipe.isVisible = false;
-          setRecipeList(newRecipeList);
-        }
-      });
-    } else if (type === "favorites") {
-      setShowFavorites((prev) => !prev);
-    }
-  };
-
-  // useEffect(() => {
-  //   const newRecipeList = [...recipeList];
-  //   if (showFavorites) {
-  //     newRecipeList.map((recipe) => {
-  //       if (recipe.isFav) {
-  //         recipe.isVisible = true;
-  //         setRecipeList(newRecipeList);
-  //       } else {
-  //         recipe.isVisible = false;
-  //         setRecipeList(newRecipeList);
-  //       }
-  //     });
-  //   } else if (!showFavorites) {
-  //     newRecipeList.map((recipe) => {
-  //       recipe.isVisible = true;
-  //       setRecipeList(newRecipeList);
-  //     });
-  //   }
-  //   console.log(showFavorites);
-  // }, [showFavorites]);
-
-  const handleSearch = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const searchBar = (
-    <form onSubmit={(e) => handleSearchClick(e, "search")}>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search"
-          onChange={handleSearch}
-          value={searchValue}
-          aria-label="Search"
-        ></input>
-        <button
-          className="btn btn-outline-primary"
-          type="button"
-          onClick={(e) => handleSearchClick(e, "favorites")}
-        >
-          Favorites
-        </button>
-        <button className="btn btn-outline-primary" type="button">
-          Search
-        </button>
-      </div>
-    </form>
-  );
-
-  const recipeListMap = recipeList
-    ? recipeList.map((recipeData) => {
-        if (recipeData.id === editingId) {
-          return editForm(recipeData);
-        } else return <Recipe recipeData={recipeData} />;
-      })
-    : null;
-
-  return recipeListMap;
+  return editForm;
 };
-
-export default EditRecipe;
