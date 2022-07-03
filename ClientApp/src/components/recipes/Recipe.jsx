@@ -1,37 +1,54 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+import recipe from "../../features/recipes/recipeService";
 
-import { deleteRecipe } from "../../features/recipes/recipeSlice";
+import {
+  deleteRecipe,
+  loadUserRecipe,
+} from "../../features/recipes/recipeSlice";
 
-const Recipe = ({ recipeData }) => {
+const Recipe = ({ recipeData, showButtons }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const token = user.token;
+  const token = user?.token;
+
+  const handleDeleteClick = () => {
+    dispatch(
+      deleteRecipe({
+        userId: recipeData.userId,
+        id: recipeData.id,
+        token,
+      })
+    );
+    dispatch(loadUserRecipe(user.id));
+  };
 
   //  Recipe list generator
-  const recipeItemButtons = (recipe) => (
-    <>
-      <button
-        className="btn btn-primary flex-fill"
-        // onClick={() => setFavRecipe(recipe.id)}
-      >
-        Favorite
-      </button>
-      <button
-        className="btn btn-primary flex-fill"
-        // onClick={() => enableEditRecipe(recipe.id)}
-      >
-        Edit
-      </button>
-      <button
-        className="btn btn-danger flex-fill"
-        onClick={() => dispatch(deleteRecipe({ userId: 1, id: 1, token }))}
-      >
-        Delete
-      </button>
-    </>
-  );
+  const recipeItemButtons = () => {
+    return (
+      <>
+        <button
+          className="btn btn-primary flex-fill"
+          // onClick={() => setFavRecipe(recipe.id)}
+        >
+          Favorite
+        </button>
+        <button
+          className="btn btn-primary flex-fill"
+          // onClick={() => enableEditRecipe(recipe.id)}
+        >
+          Edit
+        </button>
+        <button
+          className="btn btn-danger flex-fill"
+          onClick={handleDeleteClick}
+        >
+          Delete
+        </button>
+      </>
+    );
+  };
 
   const recipeItemHardLevel = (hardLevel) => {
     const hardLevelItem = (value, text) => (
@@ -106,7 +123,7 @@ const Recipe = ({ recipeData }) => {
         {recipeItemHardLevel(recipe.hardLevel)}
         {recipeItemTime(recipe.time)}
       </div>
-      {user.id === recipeData.id ? (
+      {showButtons ? (
         <div className="col-lg-6 col-xxl-4 d-flex gap-3">
           {recipeItemButtons(recipe)}
         </div>
@@ -125,19 +142,23 @@ const Recipe = ({ recipeData }) => {
   return (
     <div
       key={recipeData.id}
-      className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg text-light"
+      className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg-container overflow-hidden"
     >
       <div className="row g-4">
         <div className="col-lg-4">
           <img
             src={recipeData.image}
             alt="recipe"
-            className="img-fluid rounded shadow-lg"
+            className="img-fluid rounded shadow"
           />
         </div>
+
         <div className="col-lg-8 offset-lg-0 d-flex flex-column">
-          {title}
-          <p>{recipeData.desc}</p>
+          <div className="custom-bg">
+            {title}
+            <p className="mb-5">{recipeData.desc}</p>
+          </div>
+
           {progressBarsAndButtons(recipeData)}
         </div>
       </div>

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { addRecipe } from "../../features/recipes/recipeSlice";
+import { addRecipe, loadUserRecipe } from "../../features/recipes/recipeSlice";
 
 const AddRecipe = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
+  const { userRecipe } = useSelector((state) => state.recipe);
 
   //ADD
   const [addFormData, setAddFormData] = useState({
@@ -69,7 +70,11 @@ const AddRecipe = () => {
       token,
       userId,
     };
-    dispatch(addRecipe(recipeData));
+    try {
+      dispatch(addRecipe(recipeData)).then(dispatch(loadUserRecipe(userId)));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -97,7 +102,9 @@ const AddRecipe = () => {
           >
             <option value="1">Easy to make</option>
             <option value="2">Takes practice</option>
-            <option value="3">Only for chosen ones</option>
+            <option value="3">Pretty difficult</option>
+            <option value="4">Not for crybabies</option>
+            <option value="5">Only for chosen ones</option>
           </select>
         </div>
 

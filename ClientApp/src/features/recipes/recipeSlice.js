@@ -3,9 +3,11 @@ import recipeService from "./recipeService";
 
 // Get recipe from localStorage
 const recipe = JSON.parse(localStorage.getItem("recipe"));
+const userRecipe = JSON.parse(localStorage.getItem("userRecipe"));
 
 const initialState = {
   recipe: recipe ? recipe : null,
+  userRecipe: userRecipe ? userRecipe : null,
   isError: false,
   isSuccess: false,
   osLoading: false,
@@ -48,6 +50,24 @@ export const loadRecipe = createAsyncThunk(
   }
 );
 
+// Load user recipes
+export const loadUserRecipe = createAsyncThunk(
+  "recipe/loaduserrecipe",
+  async (userRecipe, thunkAPI) => {
+    try {
+      return await recipeService.loadUserRecipe(userRecipe);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Delete recipe
 export const deleteRecipe = createAsyncThunk(
   "recipe/deleterecipe",
@@ -55,7 +75,7 @@ export const deleteRecipe = createAsyncThunk(
 );
 
 export const recipeSlice = createSlice({
-  name: "auth",
+  name: "recipe",
   initialState,
   reducers: {
     reset: (state) => {
@@ -72,31 +92,49 @@ export const recipeSlice = createSlice({
       })
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessS = false;
-        state.recipe = action.payload;
+        state.isSuccess = true;
+        state.userRecipe = action.payload;
       })
       .addCase(addRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
-        state.recipe = null;
+        state.userRecipe = null;
       })
       .addCase(loadRecipe.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(loadRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessS = false;
+        state.isSuccess = true;
         state.recipe = action.payload;
       })
       .addCase(loadRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
         state.recipe = null;
       })
+      .addCase(loadUserRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loadUserRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userRecipe = action.payload;
+      })
+      .addCase(loadUserRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+        state.userRecipe = null;
+      })
       .addCase(deleteRecipe.fulfilled, (state) => {
-        state.recipe = null;
+        state.userRecipe = null;
+        state.isSuccess = true;
       });
   },
 });

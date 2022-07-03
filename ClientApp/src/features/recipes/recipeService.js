@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
 
 const API_URL = "/api/recipe/";
 
@@ -57,14 +56,24 @@ const loadRecipe = async () => {
   return response.data;
 };
 
+// Load user recipe
+const loadUserRecipe = async (userId) => {
+  const response = await axios.get(API_URL + "getUserAll/" + userId);
+  if (response.data) {
+    localStorage.setItem("userRecipe", JSON.stringify(response.data));
+  }
+
+  return response.data;
+};
+
 // Delete recipe
 const deleteRecipe = async (recipeData) => {
+  console.log(recipeData);
   const { userId, id, token } = recipeData;
   const filteredRecipeData = {
     userId,
     id,
   };
-  console.log(recipeData);
 
   const response = {};
   try {
@@ -79,7 +88,7 @@ const deleteRecipe = async (recipeData) => {
   }
 
   if (response.data) {
-    localStorage.removeItem("recipe", JSON.stringify(response.data));
+    localStorage.removeItem("userRecipe", JSON.stringify(response.data));
   }
 
   return response.data;
@@ -88,6 +97,7 @@ const deleteRecipe = async (recipeData) => {
 const recipe = {
   addRecipe,
   loadRecipe,
+  loadUserRecipe,
   deleteRecipe,
 };
 

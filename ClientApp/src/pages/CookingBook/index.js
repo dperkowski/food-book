@@ -13,26 +13,13 @@ const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { recipe, isError, isSuccess, message } = useSelector(
+  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
-  const [recipeList, setRecipeList] = useState();
-
-  // Load recipes
-  useEffect(() => {
-    const newRecipeList = recipe
-      ? recipe.map((recipeElement) => ({
-          ...recipeElement,
-          isVisible: true,
-          isFavorite: false,
-        }))
-      : null;
-    setRecipeList(newRecipeList);
-  }, [recipe]);
 
   useEffect(() => {
     dispatch(loadRecipe());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (isError) {
@@ -49,7 +36,7 @@ const CookingBook = () => {
     <div className="container mb-4">
       <div className="row">
         <div className="col-md-12">
-          <h1 className="display-1 mb-4 text-center">Coking book</h1>
+          <h1 className="display-1 mb-5 text-center">Coking book</h1>
         </div>
       </div>
 
