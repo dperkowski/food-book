@@ -92,12 +92,13 @@ export const recipeSlice = createSlice({
       })
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessS = false;
+        state.isSuccess = true;
         state.userRecipe = action.payload;
       })
       .addCase(addRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
         state.userRecipe = null;
       })
@@ -106,12 +107,13 @@ export const recipeSlice = createSlice({
       })
       .addCase(loadRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessS = false;
+        state.isSuccess = true;
         state.recipe = action.payload;
       })
       .addCase(loadRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
         state.recipe = null;
       })
@@ -120,17 +122,19 @@ export const recipeSlice = createSlice({
       })
       .addCase(loadUserRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessS = false;
+        state.isSuccess = true;
         state.userRecipe = action.payload;
       })
       .addCase(loadUserRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isSuccess = false;
         state.message = action.payload;
         state.userRecipe = null;
       })
       .addCase(deleteRecipe.fulfilled, (state) => {
         state.userRecipe = null;
+        state.isSuccess = true;
       });
   },
 });

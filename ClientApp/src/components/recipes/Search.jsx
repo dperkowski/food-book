@@ -14,7 +14,7 @@ const Search = () => {
 
   useEffect(() => {
     if (!filteredList) setFilteredList(recipe);
-  }, []);
+  }, [isSuccess]);
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();

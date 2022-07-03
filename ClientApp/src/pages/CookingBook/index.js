@@ -13,26 +13,18 @@ const CookingBook = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { recipe, isError, isSuccess, message } = useSelector(
+  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
-  const [recipeList, setRecipeList] = useState();
-
-  // Load recipes
-  // useEffect(() => {
-  //   const newRecipeList = recipe
-  //     ? recipe.map((recipeElement) => ({
-  //         ...recipeElement,
-  //         isVisible: true,
-  //         isFavorite: false,
-  //       }))
-  //     : null;
-  //   setRecipeList(newRecipeList);
-  // }, [recipe]);
 
   useEffect(() => {
     dispatch(loadRecipe());
+    console.log("loaded");
   }, []);
+
+  console.log("success - " + isSuccess);
+  console.log("error - " + isError);
+  console.log("loading - " + isLoading);
 
   useEffect(() => {
     if (isError) {

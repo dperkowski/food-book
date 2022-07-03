@@ -73,13 +73,6 @@ const AddRecipe = () => {
     dispatch(addRecipe(recipeData));
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(loadUserRecipe(user.id));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <form onSubmit={handleAddRecipeSubmit}>
       <div className="row">
