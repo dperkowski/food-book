@@ -70,7 +70,11 @@ const AddRecipe = () => {
       token,
       userId,
     };
-    dispatch(addRecipe(recipeData));
+    try {
+      dispatch(addRecipe(recipeData)).then(dispatch(loadUserRecipe(userId)));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

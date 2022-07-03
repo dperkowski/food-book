@@ -19,12 +19,7 @@ const CookingBook = () => {
 
   useEffect(() => {
     dispatch(loadRecipe());
-    console.log("loaded");
   }, []);
-
-  console.log("success - " + isSuccess);
-  console.log("error - " + isError);
-  console.log("loading - " + isLoading);
 
   useEffect(() => {
     if (isError) {
