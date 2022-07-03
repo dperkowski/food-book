@@ -68,12 +68,12 @@ const loadUserRecipe = async (userId) => {
 
 // Delete recipe
 const deleteRecipe = async (recipeData) => {
+  console.log(recipeData);
   const { userId, id, token } = recipeData;
   const filteredRecipeData = {
     userId,
     id,
   };
-  console.log(recipeData);
 
   const response = {};
   try {
@@ -88,7 +88,7 @@ const deleteRecipe = async (recipeData) => {
   }
 
   if (response.data) {
-    localStorage.removeItem("recipe", JSON.stringify(response.data));
+    localStorage.removeItem("userRecipe", JSON.stringify(response.data));
   }
 
   return response.data;

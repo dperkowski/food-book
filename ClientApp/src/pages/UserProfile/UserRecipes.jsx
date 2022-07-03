@@ -17,9 +17,6 @@ const UserRecipes = () => {
     dispatch(loadUserRecipe(user.id));
   }, []);
 
-  console.log(userRecipe);
-  console.log(user.id);
-
   // const [filteredList, setFilteredList] = useState(recipe);
 
   // useEffect(() => {
@@ -38,7 +35,12 @@ const UserRecipes = () => {
   // };
 
   return (
-    <Recipes recipeList={userRecipe} user={user} keyString="userrecipes" />
+    <Recipes
+      recipeList={userRecipe}
+      user={user}
+      keyString="userrecipes"
+      showButtons={true}
+    />
   );
 };
 

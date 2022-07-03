@@ -19,20 +19,20 @@ const CookingBook = () => {
   const [recipeList, setRecipeList] = useState();
 
   // Load recipes
-  useEffect(() => {
-    const newRecipeList = recipe
-      ? recipe.map((recipeElement) => ({
-          ...recipeElement,
-          isVisible: true,
-          isFavorite: false,
-        }))
-      : null;
-    setRecipeList(newRecipeList);
-  }, [recipe]);
+  // useEffect(() => {
+  //   const newRecipeList = recipe
+  //     ? recipe.map((recipeElement) => ({
+  //         ...recipeElement,
+  //         isVisible: true,
+  //         isFavorite: false,
+  //       }))
+  //     : null;
+  //   setRecipeList(newRecipeList);
+  // }, [recipe]);
 
   useEffect(() => {
     dispatch(loadRecipe());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (isError) {

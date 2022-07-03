@@ -1,37 +1,54 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+import recipe from "../../features/recipes/recipeService";
 
-import { deleteRecipe } from "../../features/recipes/recipeSlice";
+import {
+  deleteRecipe,
+  loadUserRecipe,
+} from "../../features/recipes/recipeSlice";
 
-const Recipe = ({ recipeData }) => {
+const Recipe = ({ recipeData, showButtons }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const token = user?.token;
 
+  const handleDeleteClick = () => {
+    dispatch(
+      deleteRecipe({
+        userId: recipeData.userId,
+        id: recipeData.id,
+        token,
+      })
+    );
+    dispatch(loadUserRecipe(user.id));
+  };
+
   //  Recipe list generator
-  const recipeItemButtons = (recipe) => (
-    <>
-      <button
-        className="btn btn-primary flex-fill"
-        // onClick={() => setFavRecipe(recipe.id)}
-      >
-        Favorite
-      </button>
-      <button
-        className="btn btn-primary flex-fill"
-        // onClick={() => enableEditRecipe(recipe.id)}
-      >
-        Edit
-      </button>
-      <button
-        className="btn btn-danger flex-fill"
-        onClick={() => dispatch(deleteRecipe({ userId: 1, id: 1, token }))}
-      >
-        Delete
-      </button>
-    </>
-  );
+  const recipeItemButtons = () => {
+    return (
+      <>
+        <button
+          className="btn btn-primary flex-fill"
+          // onClick={() => setFavRecipe(recipe.id)}
+        >
+          Favorite
+        </button>
+        <button
+          className="btn btn-primary flex-fill"
+          // onClick={() => enableEditRecipe(recipe.id)}
+        >
+          Edit
+        </button>
+        <button
+          className="btn btn-danger flex-fill"
+          onClick={handleDeleteClick}
+        >
+          Delete
+        </button>
+      </>
+    );
+  };
 
   const recipeItemHardLevel = (hardLevel) => {
     const hardLevelItem = (value, text) => (
@@ -106,7 +123,7 @@ const Recipe = ({ recipeData }) => {
         {recipeItemHardLevel(recipe.hardLevel)}
         {recipeItemTime(recipe.time)}
       </div>
-      {user.id === recipeData.id ? (
+      {showButtons ? (
         <div className="col-lg-6 col-xxl-4 d-flex gap-3">
           {recipeItemButtons(recipe)}
         </div>

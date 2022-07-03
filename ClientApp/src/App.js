@@ -22,7 +22,7 @@ const App = () => {
       <ToastContainer />
       <Layout>
         <Routes>
-          <Route exact path="/" element={recipe ? <CookingBook /> : null} />
+          <Route exact path="/" element={<CookingBook />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {user ? (

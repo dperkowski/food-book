@@ -10,7 +10,11 @@ const Search = () => {
   );
 
   const [searchValue, setSearchValue] = useState("");
-  const [filteredList, setFilteredList] = useState(recipe);
+  const [filteredList, setFilteredList] = useState();
+
+  useEffect(() => {
+    if (!filteredList) setFilteredList(recipe);
+  }, []);
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();

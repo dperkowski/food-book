@@ -75,7 +75,7 @@ export const deleteRecipe = createAsyncThunk(
 );
 
 export const recipeSlice = createSlice({
-  name: "auth",
+  name: "recipe",
   initialState,
   reducers: {
     reset: (state) => {
@@ -93,13 +93,13 @@ export const recipeSlice = createSlice({
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccessS = false;
-        state.recipe = action.payload;
+        state.userRecipe = action.payload;
       })
       .addCase(addRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.recipe = null;
+        state.userRecipe = null;
       })
       .addCase(loadRecipe.pending, (state) => {
         state.isLoading = true;
@@ -130,7 +130,7 @@ export const recipeSlice = createSlice({
         state.userRecipe = null;
       })
       .addCase(deleteRecipe.fulfilled, (state) => {
-        state.recipe = null;
+        state.userRecipe = null;
       });
   },
 });
