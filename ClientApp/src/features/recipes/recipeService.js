@@ -68,16 +68,16 @@ const loadUserRecipe = async (userId) => {
 
 // Delete recipe
 const deleteRecipe = async (recipeData) => {
-  console.log(recipeData);
   const { userId, id, token } = recipeData;
   const filteredRecipeData = {
     userId,
     id,
   };
 
-  const response = {};
+  let response = {};
   try {
-    response = await axios.delete(API_URL + "remove", filteredRecipeData, {
+    response = await axios.delete(API_URL + "remove", {
+      data: { ...filteredRecipeData },
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const deleteRecipe = async (recipeData) => {
   }
 
   if (response.data) {
-    localStorage.removeItem("userRecipe", JSON.stringify(response.data));
+    localStorage.removeItem("userRecipe", id);
   }
 
   return response.data;

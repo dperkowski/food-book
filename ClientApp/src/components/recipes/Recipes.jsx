@@ -4,7 +4,7 @@ import Recipe from "./Recipe.jsx";
 
 const Recipes = ({ recipeList, user, keyString, showButtons }) => {
   const editingId = 0; //todo
-  const recipeListMap = recipeList
+  const recipeListMap = Array.isArray(recipeList)
     ? recipeList.map((recipeData) => {
         return (
           <Recipe
