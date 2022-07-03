@@ -69,7 +69,8 @@ const deleteRecipe = async (recipeData) => {
   };
 
   try {
-    await axios.delete(API_URL + "remove", filteredRecipeData, {
+    await axios.delete(API_URL + "remove", {
+      data: { ...filteredRecipeData },
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",

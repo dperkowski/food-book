@@ -35,7 +35,7 @@ public class RecipeController : ControllerBase
     {
         var recipe = new UserRecipe()
         {
-            id = DateTime.Now.Ticks,
+            id = reduceId(DateTime.Now.Ticks),
             name = request.name,
             desc = request. desc,
             hardLevel = request.hardLevel,
@@ -58,6 +58,13 @@ public class RecipeController : ControllerBase
 
         var restUserRecepies = await _context.UserRecipes.Where(recipe => recipe.userId == request.userId).ToListAsync();
         return Ok(new UserRecipeResponseDto {UserRecipes = restUserRecepies, message = "Recipe added"});;
+    }
+
+    private long reduceId(long nowTicks)
+    {
+        var idString = nowTicks.ToString();
+            idString = idString.Remove(0, 2);
+            return long.Parse(idString);
     }
 
     [HttpPut("edit"), Authorize]

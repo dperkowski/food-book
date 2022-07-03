@@ -5,9 +5,15 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Fix | CRUD">
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Update Ref">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientApp/src/components/recipes/Recipes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/components/recipes/Recipes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClientApp/src/features/recipes/recipeService.js" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/features/recipes/recipeService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/RecipeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RecipeController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/app.db-wal" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,20 +26,6 @@
         <entry key="$PROJECT_DIR$" value="feature/authorization" />
       </map>
     </option>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/RecipeDto.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/RecipeDto.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/UserDto.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -58,7 +50,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.food-book: IIS Express">
+  <component name="RunManager" selected=".NET Launch Settings Profile.food-book: food_book">
     <configuration name="food-book: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/food-book.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -245,7 +237,28 @@
       <option name="project" value="LOCAL" />
       <updated>1656005613531</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="DB diff">
+      <created>1656852449940</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1656852449940</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Merge diff">
+      <created>1656852527492</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1656852527492</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Update Ref">
+      <created>1656852584137</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1656852584137</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +623,10 @@
     <MESSAGE value="Fix | User response" />
     <MESSAGE value="Add Full CRUD for UserRecipe" />
     <MESSAGE value="Fix | CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix | CRUD" />
+    <MESSAGE value="DB diff" />
+    <MESSAGE value="Merge diff" />
+    <MESSAGE value="Update Ref" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Ref" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
