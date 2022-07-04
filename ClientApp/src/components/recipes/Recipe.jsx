@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import recipe from "../../features/recipes/recipeService";
+
+import EditRecipe from "./EditRecipe";
 
 import {
   deleteRecipe,
   loadUserRecipe,
 } from "../../features/recipes/recipeSlice";
 
-import { EditRecipe } from "./EditRecipe";
-
 const Recipe = ({ recipeData, showButtons }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const token = user?.token;
+  const [editMode, setEditMode] = useState(false);
+
+  const enableRecipeEdit = () => {
+    setEditMode((prev) => !prev);
+  };
 
   const handleDeleteClick = () => {
     dispatch(
@@ -38,7 +43,7 @@ const Recipe = ({ recipeData, showButtons }) => {
         </button>
         <button
           className="btn btn-primary flex-fill"
-          onClick={() => EditRecipe(recipeData)}
+          onClick={() => enableRecipeEdit()}
         >
           Edit
         </button>
@@ -141,7 +146,7 @@ const Recipe = ({ recipeData, showButtons }) => {
     <h2>{recipeData.name}</h2>
   );
 
-  return (
+  const recipeItem = (
     <div
       key={recipeData.id}
       className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg-container overflow-hidden"
@@ -165,6 +170,12 @@ const Recipe = ({ recipeData, showButtons }) => {
         </div>
       </div>
     </div>
+  );
+
+  return editMode ? (
+    <EditRecipe recipeData={recipeData} setEditMode={setEditMode} />
+  ) : (
+    recipeItem
   );
 };
 

@@ -15,7 +15,7 @@ const UserRecipes = () => {
 
   useEffect(() => {
     dispatch(loadUserRecipe(user.id));
-  }, []);
+  }, [dispatch, user.id]);
 
   // const [filteredList, setFilteredList] = useState(recipe);
 

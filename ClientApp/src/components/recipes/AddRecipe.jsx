@@ -71,11 +71,15 @@ const AddRecipe = () => {
       userId,
     };
     try {
-      dispatch(addRecipe(recipeData)).then(dispatch(loadUserRecipe(userId)));
+      dispatch(addRecipe(recipeData));
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    dispatch(loadUserRecipe(user.id));
+  }, []);
 
   return (
     <form onSubmit={handleAddRecipeSubmit}>

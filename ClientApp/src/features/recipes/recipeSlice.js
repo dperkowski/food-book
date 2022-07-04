@@ -32,6 +32,24 @@ export const addRecipe = createAsyncThunk(
   }
 );
 
+// Edit recipe
+export const editRecipe = createAsyncThunk(
+  "recipe/editrecipe",
+  async (recipe, thunkAPI) => {
+    try {
+      return await recipeService.editRecipe(recipe);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // loadRecipe
 export const loadRecipe = createAsyncThunk(
   "recipe/loadrecipe",
@@ -93,9 +111,24 @@ export const recipeSlice = createSlice({
       .addCase(addRecipe.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.userRecipe = action.payload;
+        state.userRecipe = action.payload.userRecipes.value;
       })
       .addCase(addRecipe.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload.userRecipes.value;
+        state.userRecipe = null;
+      })
+      .addCase(editRecipe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editRecipe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userRecipe = action.payload.userRecipes.value;
+      })
+      .addCase(editRecipe.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
