@@ -5,9 +5,9 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="">
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Migrate Category">
+      <change afterPath="$PROJECT_DIR$/Controllers/CategoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DataContext.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +20,6 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/RecipeController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -93,7 +90,7 @@
       <workItem from="1655929642057" duration="337000" />
       <workItem from="1655993573441" duration="41000" />
       <workItem from="1655993644646" duration="3925000" />
-      <workItem from="1656952702046" duration="695000" />
+      <workItem from="1656952702046" duration="2524000" />
     </task>
     <task id="LOCAL-00001" summary="Example user Data">
       <created>1655753103698</created>
@@ -277,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656861352124</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Migrate Category">
+      <created>1656953783359</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1656953783359</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -648,7 +652,8 @@
     <MESSAGE value="Fix id remove" />
     <MESSAGE value="DB Save" />
     <MESSAGE value="Add Category Model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Category Model" />
+    <MESSAGE value="Migrate Category" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrate Category" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
