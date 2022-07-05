@@ -69,7 +69,7 @@ const EditRecipe = ({ recipeData, setEditMode }) => {
   };
 
   return (
-    <form className="mb-3" onSubmit={handleEditRecipe}>
+    <form className="mb-3 p-4 shadow-lg rounded" onSubmit={handleEditRecipe}>
       <div className="row">
         <div className="col-md-6 mb-3">
           <div className="input-group">

@@ -186,7 +186,7 @@ const Recipe = ({ recipeData, showButtons }) => {
         </div>
 
         <div className="col-lg-8 offset-lg-0 d-flex flex-column">
-          <div className="custom-bg">
+          <div className="custom-bg pe-lg-3">
             {title}
             <p className="mb-5">{recipeData.desc}</p>
           </div>
