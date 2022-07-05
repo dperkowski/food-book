@@ -38,6 +38,12 @@ const AddRecipe = () => {
       case "time":
         addFormDataCopy.time = e.target.value;
         break;
+      case "image":
+        addFormDataCopy.image = e.target.value;
+        break;
+      case "category":
+        addFormDataCopy.category = e.target.value;
+        break;
       default:
         break;
     }
@@ -72,6 +78,17 @@ const AddRecipe = () => {
     };
     try {
       dispatch(addRecipe(recipeData));
+      setAddFormData({
+        id: 0,
+        name: "",
+        desc: "",
+        hardLevel: 1,
+        time: undefined,
+        image: "https://picsum.photos/1000/700",
+        userId: 0,
+        userFavorites: false,
+        categories: "",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -121,6 +138,35 @@ const AddRecipe = () => {
               placeholder="Enter time"
               value={addFormData.time}
               onChange={(e) => handleAddRecipeInputChange(e, "time")}
+            ></input>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-6">
+          <div className="input-group mb-3">
+            <span className="input-group-text">Image url</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-describedby="imageUrl"
+              placeholder="Enter title"
+              value={addFormData.image}
+              onChange={(e) => handleAddRecipeInputChange(e, "image")}
+            ></input>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-group mb-3">
+            <span className="input-group-text">Category</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-describedby="category"
+              placeholder="Enter title"
+              value={addFormData.category}
+              onChange={(e) => handleAddRecipeInputChange(e, "category")}
             ></input>
           </div>
         </div>

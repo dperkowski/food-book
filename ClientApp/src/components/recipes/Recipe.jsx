@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import recipe from "../../features/recipes/recipeService";
@@ -7,6 +7,7 @@ import EditRecipe from "./EditRecipe";
 
 import {
   deleteRecipe,
+  editRecipe,
   loadUserRecipe,
 } from "../../features/recipes/recipeSlice";
 
@@ -21,6 +22,7 @@ const Recipe = ({ recipeData, showButtons }) => {
   };
 
   const handleDeleteClick = () => {
+    dispatch(loadUserRecipe(user.id));
     dispatch(
       deleteRecipe({
         userId: recipeData.userId,
@@ -31,13 +33,30 @@ const Recipe = ({ recipeData, showButtons }) => {
     dispatch(loadUserRecipe(user.id));
   };
 
+  const handleSetFav = () => {
+    dispatch(
+      editRecipe({
+        categories: {},
+        desc: recipeData.desc,
+        hardLevel: recipeData.hardLevel,
+        id: recipeData.id,
+        image: recipeData.image,
+        name: recipeData.name,
+        time: recipeData.time,
+        userId: recipeData.userId,
+        userFavorite: !recipeData.userFavorite,
+        token: user.token,
+      })
+    );
+  };
+
   //  Recipe list generator
   const recipeItemButtons = () => {
     return (
       <>
         <button
           className="btn btn-primary flex-fill"
-          // onClick={() => setFavRecipe(recipe.id)}
+          onClick={() => handleSetFav()}
         >
           Favorite
         </button>
@@ -71,6 +90,10 @@ const Recipe = ({ recipeData, showButtons }) => {
             role="progressbar"
             style={{
               width: value + "%",
+              minWidth: "fit-content",
+              maxWidth: 100 + "%",
+              paddingLeft: 5 + "px",
+              paddingRight: 5 + "px",
             }}
             aria-valuenow={value}
             aria-valuemin="0"
@@ -111,8 +134,10 @@ const Recipe = ({ recipeData, showButtons }) => {
           role="progressbar"
           style={{
             width: (value / 420) * 100 + "%",
-            minWidth: 50 + "px",
+            minWidth: "fit-content",
             maxWidth: 100 + "%",
+            paddingLeft: 5 + "px",
+            paddingRight: 5 + "px",
           }}
           aria-valuenow={value}
           aria-valuemin="0"
@@ -149,7 +174,7 @@ const Recipe = ({ recipeData, showButtons }) => {
   const recipeItem = (
     <div
       key={recipeData.id}
-      className="p-4 ps-xs-4 ps-lg-0 mb-3 custom-bg-container overflow-hidden"
+      className="p-4 ps-xs-4 ps-lg-0 pe-lg-0 mb-3 custom-bg-container overflow-hidden"
     >
       <div className="row g-4">
         <div className="col-lg-4">
