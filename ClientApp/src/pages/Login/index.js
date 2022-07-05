@@ -49,6 +49,9 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = formData;
     const userData = { email, password };
+    if (!email || !password) {
+      return toast.error("Oops... Try to fill all fields");
+    }
     dispatch(login(userData));
   };
 

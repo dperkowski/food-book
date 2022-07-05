@@ -58,8 +58,23 @@ const Register = () => {
 
     const { name, mail, pass, pass2 } = formData;
 
+    if (!name || !mail || !pass || !pass2) {
+      return toast.error("Oops... Try to fill all fields");
+    }
+
+    if (
+      name.length < 6 ||
+      mail.length < 6 ||
+      pass.length < 6 ||
+      pass2.length < 6
+    ) {
+      return toast.error(
+        "Oops... Name, email or password may be too short (min. 6 characters)"
+      );
+    }
+
     if (pass !== pass2) {
-      toast.error("Passwords do not mach");
+      return toast.error("Passwords do not mach");
     } else {
       const userData = {
         name,

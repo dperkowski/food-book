@@ -80,9 +80,15 @@ const AddRecipe = () => {
       userId,
     };
 
-    if (!name || !desc || !time || !image) {
+    if (!name || !desc || !time || !image)
       return toast.error("Oops... Try to fill all fields");
-    }
+    if (name.length < 5)
+      return toast.error("Oops... Title must be at least 5 characters");
+    if (desc.length < 50)
+      return toast.error("Oops... Description must be at least 50 characters");
+    if (time < 5) return toast.error("Oops... Minimal time is 5min");
+    if (image.length < 10)
+      return toast.error("Oops... Image url must be at least 10 characters");
 
     try {
       dispatch(addRecipe(recipeData));
