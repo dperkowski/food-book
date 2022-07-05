@@ -101,7 +101,7 @@ namespace food_book.Migrations
                 {
                     b.HasBaseType("food_book.Recipe");
 
-                    b.Property<bool>("userFavorite")
+                    b.Property<int>("userFavorite")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("userId")

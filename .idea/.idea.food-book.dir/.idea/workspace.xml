@@ -5,9 +5,8 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Migrate Category">
-      <change afterPath="$PROJECT_DIR$/Controllers/CategoryController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Fav Fix Migration">
+      <change beforePath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +19,10 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/Recipe.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/RecipeDto.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -281,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656953783359</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fav Fix Migration">
+      <created>1657036624368</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1657036624368</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Example user Data" />
     <MESSAGE value="Refactor User + Add register method" />
     <MESSAGE value="Finish Login and Register with JWT Token" />
     <MESSAGE value="Differ Register And Login DTO" />
@@ -653,7 +662,8 @@
     <MESSAGE value="DB Save" />
     <MESSAGE value="Add Category Model" />
     <MESSAGE value="Migrate Category" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migrate Category" />
+    <MESSAGE value="Fav Fix Migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fav Fix Migration" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
