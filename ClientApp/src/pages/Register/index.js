@@ -73,7 +73,7 @@ const Register = () => {
   const form = (
     <form onSubmit={handleLoginSubmit}>
       <div className="input-group mb-3">
-        <span class="input-group-text">Name</span>
+        <span className="input-group-text">Name</span>
         <input
           type="text"
           className="form-control"
@@ -84,7 +84,7 @@ const Register = () => {
       </div>
 
       <div className="input-group mb-3">
-        <span class="input-group-text">Email</span>
+        <span className="input-group-text">Email</span>
         <input
           type="text"
           className="form-control"
@@ -95,7 +95,7 @@ const Register = () => {
       </div>
 
       <div className="input-group mb-3">
-        <span class="input-group-text">Password</span>
+        <span className="input-group-text">Password</span>
         <input
           type="password"
           className="form-control"
@@ -106,7 +106,7 @@ const Register = () => {
       </div>
 
       <div className="input-group">
-        <span class="input-group-text">Repeat password</span>
+        <span className="input-group-text">Repeat password</span>
         <input
           type="password"
           className="form-control"

@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { addRecipe, loadUserRecipe } from "../../features/recipes/recipeSlice";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddRecipe = () => {
   const dispatch = useDispatch();
 
@@ -76,6 +79,11 @@ const AddRecipe = () => {
       token,
       userId,
     };
+
+    if (!name || !desc || !time || !image) {
+      return toast.error("Oops... Try to fill all fields");
+    }
+
     try {
       dispatch(addRecipe(recipeData));
       setAddFormData({
@@ -83,12 +91,13 @@ const AddRecipe = () => {
         name: "",
         desc: "",
         hardLevel: 1,
-        time: undefined,
+        time: "",
         image: "https://picsum.photos/1000/700",
         userId: 0,
         userFavorites: false,
         categories: "",
       });
+      toast.success("Reciped added");
     } catch (error) {
       console.log(error);
     }
