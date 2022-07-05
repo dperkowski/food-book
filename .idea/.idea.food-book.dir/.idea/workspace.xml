@@ -5,7 +5,11 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Discriminator Fix" />
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DataContext.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,9 +23,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Migrations/DataContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/Recipe.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/RecipeDto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3839fc8fee5ae62538a4469ed86bbba1ccd15d4e0da63bba779abe1719da3/IConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Controllers/CategoryController.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -93,6 +96,7 @@
       <workItem from="1655993573441" duration="41000" />
       <workItem from="1655993644646" duration="3925000" />
       <workItem from="1656952702046" duration="2524000" />
+      <workItem from="1657039170607" duration="1395000" />
     </task>
     <task id="LOCAL-00001" summary="Example user Data">
       <created>1655753103698</created>
@@ -304,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657037024140</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Add register validation | Backend">
+      <created>1657037566292</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1657037566292</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Differ Register And Login DTO" />
     <MESSAGE value="Create Recipe Model" />
     <MESSAGE value="Add RecipeController with temporary Data" />
     <MESSAGE value="Add Authentication Schema + Require Authorization for Recipe Controller" />
@@ -676,7 +686,8 @@
     <MESSAGE value="Fav Fix Migration" />
     <MESSAGE value="ADd Entries to DB" />
     <MESSAGE value="Discriminator Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Discriminator Fix" />
+    <MESSAGE value="Add register validation | Backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add register validation | Backend" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

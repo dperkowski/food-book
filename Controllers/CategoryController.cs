@@ -1,4 +1,5 @@
 ﻿using food_book.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,12 +9,12 @@ namespace food_book.Controllers;
 [Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
+    private readonly ILogger<CategoryController> _logger;
     private readonly DataContext _context;
 
-    public CategoryController(IConfiguration configuration, DataContext context)
+    public CategoryController(ILogger<CategoryController> logger, DataContext context)
     {
-        _configuration = configuration;
+        _logger = logger;
         _context = context;
     }
     
