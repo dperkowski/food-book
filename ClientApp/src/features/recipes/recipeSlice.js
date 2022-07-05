@@ -4,11 +4,12 @@ import recipeService from "./recipeService";
 // Get recipe from localStorage
 const recipe = JSON.parse(localStorage.getItem("recipe"));
 const userRecipe = JSON.parse(localStorage.getItem("userRecipe"));
+const category = JSON.parse(localStorage.getItem("category"));
 
 const initialState = {
   recipe: recipe ? recipe : null,
   userRecipe: userRecipe ? userRecipe : null,
-  category: userRecipe ? userRecipe : null,
+  category: category ? category : null,
   isError: false,
   isSuccess: false,
   osLoading: false,
@@ -71,10 +72,10 @@ export const loadRecipe = createAsyncThunk(
 
 // Load category
 export const loadCategory = createAsyncThunk(
-  "category/loadcategory",
+  "category/getAll",
   async (category, thunkAPI) => {
     try {
-      return await recipeService.loadRecipe(category);
+      return await recipeService.loadCategory(category);
     } catch (error) {
       const message =
         (error.response &&

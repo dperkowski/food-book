@@ -110,6 +110,7 @@ const loadRecipe = async () => {
 // Load category
 const loadCategory = async () => {
   const response = await axios.get("category/getAll");
+  console.log(response);
 
   if (response.data) {
     localStorage.setItem("category", JSON.stringify(response.data));
