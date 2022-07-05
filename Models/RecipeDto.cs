@@ -16,7 +16,7 @@ public class RecipeAddDto
     
     public long userId { get; set; }
     
-    public bool userFavorite { get; set; }
+    public int userFavorite { get; set; }
 }
 
 public class RecipeEditDto
@@ -35,7 +35,7 @@ public class RecipeEditDto
     
     public long userId { get; set; }
     
-    public bool userFavorite { get; set; }
+    public int userFavorite { get; set; }
 }
 
 public class UserRecipeResponseDto
