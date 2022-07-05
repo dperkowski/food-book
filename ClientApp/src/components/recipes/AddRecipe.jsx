@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { addRecipe, loadUserRecipe } from "../../features/recipes/recipeSlice";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AddRecipe = () => {
   const dispatch = useDispatch();
 
@@ -16,7 +19,7 @@ const AddRecipe = () => {
     name: "",
     desc: "",
     hardLevel: 1,
-    time: undefined,
+    time: "",
     image: "https://picsum.photos/1000/700",
     userId: 0,
     userFavorites: false,
@@ -37,6 +40,12 @@ const AddRecipe = () => {
         break;
       case "time":
         addFormDataCopy.time = e.target.value;
+        break;
+      case "image":
+        addFormDataCopy.image = e.target.value;
+        break;
+      case "category":
+        addFormDataCopy.category = e.target.value;
         break;
       default:
         break;
@@ -70,8 +79,31 @@ const AddRecipe = () => {
       token,
       userId,
     };
+
+    if (!name || !desc || !time || !image)
+      return toast.error("Oops... Try to fill all fields");
+    if (name.length < 5)
+      return toast.error("Oops... Title must be at least 5 characters");
+    if (desc.length < 50)
+      return toast.error("Oops... Description must be at least 50 characters");
+    if (time < 5) return toast.error("Oops... Minimal time is 5min");
+    if (image.length < 10)
+      return toast.error("Oops... Image url must be at least 10 characters");
+
     try {
       dispatch(addRecipe(recipeData));
+      setAddFormData({
+        id: 0,
+        name: "",
+        desc: "",
+        hardLevel: 1,
+        time: "",
+        image: "https://picsum.photos/1000/700",
+        userId: 0,
+        userFavorites: false,
+        categories: "",
+      });
+      toast.success("Reciped added");
     } catch (error) {
       console.log(error);
     }
@@ -121,6 +153,35 @@ const AddRecipe = () => {
               placeholder="Enter time"
               value={addFormData.time}
               onChange={(e) => handleAddRecipeInputChange(e, "time")}
+            ></input>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-6">
+          <div className="input-group mb-3">
+            <span className="input-group-text">Image url</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-describedby="imageUrl"
+              placeholder="Enter title"
+              value={addFormData.image}
+              onChange={(e) => handleAddRecipeInputChange(e, "image")}
+            ></input>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="input-group mb-3">
+            <span className="input-group-text">Category</span>
+            <input
+              type="text"
+              className="form-control"
+              aria-describedby="category"
+              placeholder="Enter title"
+              value={addFormData.category}
+              onChange={(e) => handleAddRecipeInputChange(e, "category")}
             ></input>
           </div>
         </div>

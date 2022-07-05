@@ -166,7 +166,7 @@ export const recipeSlice = createSlice({
         state.userRecipe = null;
       })
       .addCase(deleteRecipe.fulfilled, (state) => {
-        state.userRecipe = null;
+        // state.userRecipe = null;
         state.isSuccess = true;
       });
   },

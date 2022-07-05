@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Recipes from "./Recipes";
 
+import { loadRecipe } from "../../features/recipes/recipeSlice";
+
 const Search = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { recipe, isError, isSuccess, message } = useSelector(
+  const { recipe, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
 
@@ -13,8 +16,8 @@ const Search = () => {
   const [filteredList, setFilteredList] = useState();
 
   useEffect(() => {
-    if (!filteredList) setFilteredList(recipe);
-  }, [isSuccess]);
+    setFilteredList(recipe);
+  }, [isSuccess, isLoading]);
 
   const handleSearchClick = (e, type) => {
     e.preventDefault();
@@ -45,13 +48,6 @@ const Search = () => {
             value={searchValue}
             aria-label="Search"
           ></input>
-          <button
-            className="btn btn-outline-primary"
-            type="button"
-            onClick={(e) => handleSearchClick(e, "favorites")}
-          >
-            Favorites
-          </button>
           <button
             className="btn btn-outline-primary"
             type="button"
