@@ -5,15 +5,9 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Update Ref">
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Migrate Category">
+      <change afterPath="$PROJECT_DIR$/Controllers/CategoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.food-book.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/src/components/recipes/Recipes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/components/recipes/Recipes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientApp/src/features/recipes/recipeService.js" beforeDir="false" afterPath="$PROJECT_DIR$/ClientApp/src/features/recipes/recipeService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/RecipeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RecipeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/app.db-wal" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/authorization" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
   </component>
@@ -85,7 +79,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9fe497b8-15d0-4f99-a1e8-836acfdad825" name="Changes" comment="" />
+      <changelist id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="" />
       <created>1655752034165</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -96,6 +90,7 @@
       <workItem from="1655929642057" duration="337000" />
       <workItem from="1655993573441" duration="41000" />
       <workItem from="1655993644646" duration="3925000" />
+      <workItem from="1656952702046" duration="2524000" />
     </task>
     <task id="LOCAL-00001" summary="Example user Data">
       <created>1655753103698</created>
@@ -258,7 +253,35 @@
       <option name="project" value="LOCAL" />
       <updated>1656852584137</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fix id remove">
+      <created>1656860516983</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1656860516983</updated>
+    </task>
+    <task id="LOCAL-00025" summary="DB Save">
+      <created>1656860556402</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1656860556402</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Add Category Model">
+      <created>1656861352124</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1656861352124</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Migrate Category">
+      <created>1656953783359</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1656953783359</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,7 +649,11 @@
     <MESSAGE value="DB diff" />
     <MESSAGE value="Merge diff" />
     <MESSAGE value="Update Ref" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Ref" />
+    <MESSAGE value="Fix id remove" />
+    <MESSAGE value="DB Save" />
+    <MESSAGE value="Add Category Model" />
+    <MESSAGE value="Migrate Category" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrate Category" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
