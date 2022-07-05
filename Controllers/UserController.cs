@@ -7,7 +7,7 @@ using food_book.Data;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-
+using food_book.Utilities;
 namespace food_book.Controllers;
 
 [ApiController]
@@ -26,7 +26,13 @@ public class UserController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<UserResponseDto>> Register(UserRegisterDto request)
     {
+        
+        if( request.name.Length < 5 )  return BadRequest("Your name must have at least 5 symbols");
+        if( !Validator.IsValidEmail(request.mail) )  return BadRequest("Your mail is incorrect");
+        if( request.pass.Length < 6 )  return BadRequest("Your pass must have at least 6 symbols");
+        
         CreatePassHash(request.pass, out byte[] passHash, out byte[] passSalt);
+        
         var user = new User
         {
             id = DateTime.Now.Ticks,

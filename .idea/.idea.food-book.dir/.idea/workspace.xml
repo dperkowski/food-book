@@ -5,9 +5,7 @@
     <projectFile profileName="IIS Express">food-book.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Fav Fix Migration">
-      <change beforePath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Migrations/DataContextModelSnapshot.cs" afterDir="false" />
-    </list>
+    <list default="true" id="00f83ae1-38f6-4a64-8f35-5760dadd566f" name="Changes" comment="Discriminator Fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +19,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Migrations/DataContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/Recipe.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/xervi/OneDrive/Pulpit/dev/react/food-book/Models/RecipeDto.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -291,7 +290,21 @@
       <option name="project" value="LOCAL" />
       <updated>1657036624368</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="ADd Entries to DB">
+      <created>1657036864559</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1657036864559</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Discriminator Fix">
+      <created>1657037024140</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1657037024140</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,8 +651,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor User + Add register method" />
-    <MESSAGE value="Finish Login and Register with JWT Token" />
     <MESSAGE value="Differ Register And Login DTO" />
     <MESSAGE value="Create Recipe Model" />
     <MESSAGE value="Add RecipeController with temporary Data" />
@@ -663,7 +674,9 @@
     <MESSAGE value="Add Category Model" />
     <MESSAGE value="Migrate Category" />
     <MESSAGE value="Fav Fix Migration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fav Fix Migration" />
+    <MESSAGE value="ADd Entries to DB" />
+    <MESSAGE value="Discriminator Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Discriminator Fix" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
