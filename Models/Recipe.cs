@@ -26,7 +26,7 @@ public class UserRecipe : Recipe
 {
     public long userId { get; set; }
     
-    public bool userFavorite { get; set; }
+    public int userFavorite { get; set; }
     
 }
 

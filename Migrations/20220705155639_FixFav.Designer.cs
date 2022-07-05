@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using food_book.Data;
 
@@ -10,9 +11,10 @@ using food_book.Data;
 namespace food_book.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220705155639_FixFav")]
+    partial class FixFav
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -101,7 +103,7 @@ namespace food_book.Migrations
                 {
                     b.HasBaseType("food_book.Recipe");
 
-                    b.Property<bool>("userFavorite")
+                    b.Property<int>("userFavorite")
                         .HasColumnType("INTEGER");
 
                     b.Property<long>("userId")
