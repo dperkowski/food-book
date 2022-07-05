@@ -19,7 +19,7 @@ const AddRecipe = () => {
     name: "",
     desc: "",
     hardLevel: 1,
-    time: undefined,
+    time: "",
     image: "https://picsum.photos/1000/700",
     userId: 0,
     userFavorites: false,
