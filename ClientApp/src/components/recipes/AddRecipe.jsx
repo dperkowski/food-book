@@ -2,7 +2,11 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { addRecipe, loadUserRecipe } from "../../features/recipes/recipeSlice";
+import {
+  addRecipe,
+  loadUserRecipe,
+  loadCategory,
+} from "../../features/recipes/recipeSlice";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +26,7 @@ const AddRecipe = () => {
     time: "",
     image: "https://picsum.photos/1000/700",
     userId: 0,
-    userFavorites: false,
+    userFavorites: 0,
     categories: "",
   });
 
@@ -100,7 +104,7 @@ const AddRecipe = () => {
         time: "",
         image: "https://picsum.photos/1000/700",
         userId: 0,
-        userFavorites: false,
+        userFavorites: 0,
         categories: "",
       });
       toast.success("Reciped added");

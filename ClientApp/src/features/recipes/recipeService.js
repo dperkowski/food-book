@@ -107,6 +107,17 @@ const loadRecipe = async () => {
   return response.data;
 };
 
+// Load category
+const loadCategory = async () => {
+  const response = await axios.get("category/getAll");
+
+  if (response.data) {
+    localStorage.setItem("category", JSON.stringify(response.data));
+  }
+
+  return response.data;
+};
+
 // Load user recipe
 const loadUserRecipe = async (userId) => {
   const response = await axios.get(API_URL + "getUserAll/" + userId);
@@ -142,6 +153,7 @@ const recipe = {
   addRecipe,
   editRecipe,
   loadRecipe,
+  loadCategory,
   loadUserRecipe,
   deleteRecipe,
 };

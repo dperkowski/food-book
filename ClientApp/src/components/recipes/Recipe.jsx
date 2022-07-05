@@ -34,9 +34,11 @@ const Recipe = ({ recipeData, showButtons }) => {
   };
 
   const handleSetFav = () => {
+    console.log(recipeData);
+
     dispatch(
       editRecipe({
-        categories: {},
+        categories: ["zupa", "deser"],
         desc: recipeData.desc,
         hardLevel: recipeData.hardLevel,
         id: recipeData.id,
@@ -44,7 +46,7 @@ const Recipe = ({ recipeData, showButtons }) => {
         name: recipeData.name,
         time: recipeData.time,
         userId: recipeData.userId,
-        userFavorite: !recipeData.userFavorite,
+        userFavorite: 1,
         token: user.token,
       })
     );

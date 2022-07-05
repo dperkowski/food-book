@@ -17,23 +17,6 @@ const UserRecipes = () => {
     dispatch(loadUserRecipe(user.id));
   }, [dispatch, user.id]);
 
-  // const [filteredList, setFilteredList] = useState(recipe);
-
-  // useEffect(() => {
-  //   handleArray();
-  // }, []);
-
-  // const handleArray = () => {
-  //   const newFilteredList = [...recipe];
-  //   const newArray = [];
-  //   newFilteredList.map((recipe) => {
-  //     if (recipe.id === user.id) {
-  //       return newArray.push(recipe);
-  //     } else return null;
-  //   });
-  //   setFilteredList(newArray);
-  // };
-
   return (
     <Recipes
       recipeList={userRecipe}

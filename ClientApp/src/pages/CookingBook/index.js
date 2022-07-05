@@ -17,6 +17,8 @@ const CookingBook = () => {
     (state) => state.recipe
   );
 
+  console.log(recipe);
+
   useEffect(() => {
     dispatch(loadRecipe());
   }, []);
